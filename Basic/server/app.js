@@ -10,7 +10,7 @@ import cookieParser from 'cookie-parser';
 let app = express();
 let env = config.env || 'dev';
 // use logger.xxx instead of console.xxx
-let logger = require('./utils/log')('app.js');
+// let logger = require('./utils/log')('app.js');
 let auth = require('./utils/auth');
 
 if (env === 'dev') {
@@ -33,17 +33,12 @@ app.use(favicon(path.join(__dirname, '../', config[env].dist, '/favicon.ico')));
 // }));
 
 app.use(cookieParser()); // to support cookie
-// app.use(bodyParser.json()); // to support JSON-encoded bodies
-// app.use(bodyParser.json({limit: '50mb'})); // to support JSON-encoded bodies
-// app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
-//   limit: '50mb',
-//   extended: true
-// }));
 app.use(bodyParser({ limit: '50mb' }));
 
 // 上游验证token
 // app.use(function(req, res, next) {
 //     let token = req.body.token || req.query.token || req.cookies.aura_token || req.headers['Authorization'];
+//     console.log("token", token)
 //     if (req.path.startsWith('/api/user/login') || req.path.startsWith('/datasets')) {
 //         next();
 //     } else if (token) {
@@ -67,29 +62,17 @@ app.use(bodyParser({ limit: '50mb' }));
 // });
 
 // rest api
-// app.use('/api/jupyter', require('./api/jupyterService'));
-// app.use('/api/user', require('./api/user'));
-// app.use('/api/model', require('./api/model'));
+app.use('/api/user', require('./api/user'));
 // app.use('/api/app', require('./api/app'));
-// app.use('/api/appFile', require('./api/appFile'));
 
-
-
-//app.use('/queryDS/all', proxy('http://10.20.51.3:5000/queryDS/all'));
-//app.use('/datasets', proxy({target: 'http://10.20.51.3:5000', pathRewrite: {'^/datasets': ''}}));
-// app.use('/datasets', proxy({target: config[env].mdpUrl, secure: false,
-//   changeOrigin: false, pathRewrite: {'^/datasets': ''}
-// }));
-// app.use('/datasets', proxy({target: 'http://10.13.6.103:9099', secure: false,
-//   changeOrigin: true, pathRewrite: {'^/datasets': ''}}));
 
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '../', config[env].dist, '/404.html')); // load the single view file (angular will handle the page changes on the front-end)
 });
 
 app.listen(config[env].port, function() {
-    //console.log('App listening on port ' + config[env].port + '!');
-    logger.info('App listening on port ' + config[env].port + '!');
+    console.log('App listening on port ' + config[env].port + '!');
+    // logger.info('App listening on port ' + config[env].port + '!');
 });
 
 module.exports = app;

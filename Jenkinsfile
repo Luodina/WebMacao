@@ -10,7 +10,7 @@ node {
         checkout scm 
     }
     stage('Build Docker Image ...') {
-        app = docker.build("aura/web")
+        app = docker.build("macao/web")
     }
     stage('Acceptance Tests...') {
         app.withRun{

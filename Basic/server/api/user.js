@@ -9,8 +9,8 @@ const config = require('./../config');
 let url = require('url');
 let env = config.env || 'dev';
 let isUUID = require('is-uuid');
-import {getUserWorkspace} from '../workspace';
-let logger = require('../utils/log')('./api/users.js');
+// import {getUserWorkspace} from '../workspace';
+//let logger = require('../utils/log')('./api/users.js');
 // 用户登录，发放token
 router.post('/login', function(req, res) {
     let username = req.body.username;
@@ -43,34 +43,34 @@ router.post('/login', function(req, res) {
     }
 });
 
-router.get('/server', function(req, res) {
-  let username = req.user.username;
-  let app = req.query.app;
-  let file = req.query.file;
-  let workspace = getUserWorkspace(username, config[env]);
-  workspace.getConnSetting().then((setting) => {
-      // console.log(server);
-      let final_url = url.resolve(setting.baseUrl, `/tree/user_${username}`);
+// router.get('/server', function(req, res) {
+//   let username = req.user.username;
+//   let app = req.query.app;
+//   let file = req.query.file;
+//   let workspace = getUserWorkspace(username, config[env]);
+//   workspace.getConnSetting().then((setting) => {
+//       // console.log(server);
+//       let final_url = url.resolve(setting.baseUrl, `/tree/user_${username}`);
 
-      logger.debug(app);
+//       logger.debug(app);
 
-      logger.debug(isUUID.v4(app));
+//       logger.debug(isUUID.v4(app));
 
-      if (app !== null && isUUID.v4(app)) {
-        final_url +=  `/APP_${app}`;
-      }
-      if (file != null ) {
-        final_url +=  `/${file}`;
-      }
+//       if (app !== null && isUUID.v4(app)) {
+//         final_url +=  `/APP_${app}`;
+//       }
+//       if (file != null ) {
+//         final_url +=  `/${file}`;
+//       }
 
-      final_url += `?token=${setting.token}`;
-      res.status(200).send(final_url);
+//       final_url += `?token=${setting.token}`;
+//       res.status(200).send(final_url);
 
-  }).catch( err => {
-    logger.debug(err);
-    res.status(500).send('');
-  });
+//   }).catch( err => {
+//     logger.debug(err);
+//     res.status(500).send('');
+//   });
 
-});
+// });
 
 module.exports = router;
