@@ -6,7 +6,6 @@
 /app/styles
 /.idea
 npm-debug.log
-/uploads
 nohup.out
 /etc/
 /node/
@@ -17,8 +16,4 @@ log/
 *.log
 users.dat
 .tmp/
-/notebookModel
-/notebookApp
-__pycache__
-**/.ipynb_checkpoints
-**/.DS_Store
+
