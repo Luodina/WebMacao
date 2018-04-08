@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="bower_components/mermaid/dist/mermaid.dark.css" />
     <link rel="stylesheet" href="bower_components/jquery-ui/themes/ui-lightness/jquery-ui.css" />
-    <link rel="stylesheet" href="styles/dataExplore/dataExplore.css" />
+    <link rel="stylesheet" href="styles/rtm/rtm.css" />
     <link rel="stylesheet" href="styles/dataApp/dataApp.css" />
     <!-- endbuild -->
 </head>
@@ -51,8 +51,10 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-head" id="js-navbar-collapse">
                     <div class="nav navbar-nav navbar-left nav-top" id="navbar-nav">
-                        <a ng-class="{true: 'active'}[active == 'apps']" ui-sref='apps'>{{'web_common_001' | translate}}</a>
-                        <a ng-class="{true: 'active'}[active == 'dashboard']" ui-sref="dashboard">{{'展示台' }}</a>
+                        <a ng-class="{true: 'active'}[active == 'rtm']" ui-sref='rtm'>Real Time Monitoring</a>
+                        <a ng-class="{true: 'active'}[active == 'people']" ui-sref="people">Registered People</a>
+                        <a ng-class="{true: 'active'}[active == 'history']" ui-sref="history">Capture History</a>
+                        <a ng-class="{true: 'active'}[active == 'setting']" ui-sref="setting">Setting</a>
                         <!--<a ng-class="{true: 'active'}[active == 'settings']" ui-sref="settings">{{'web_common_005' | translate}}</a>-->
                     </div>
                     <!--<div ng-if="!isshow && appInfoShow" style="display: inline-block;line-height: 52px;font-size: 16px;margin-left: 10px">-->
@@ -64,7 +66,7 @@
                     <!--<span>/ {{modelExpertName}}</span>-->
                     <!--</div>-->
                     <div class="navbar-right">
-                        <span class="help_tit">帮助</span>
+                        <!-- <span class="help_tit">帮助</span> -->
                         <div class="data_bg header_area_select head_index">
                             <div uib-dropdown="" on-toggle="toggled(open)" class="dropdown open">
                                 <a href="javascript:void(0);" class="per_block dropdown-toggle" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="true">
@@ -72,8 +74,8 @@
                                     <span class="xl_bg"></span>
                                 </a>
                                 <ul class="dropdown-menu index_area_drop" uib-dropdown-menu="" aria-labelledby="user-menu">
-                                    <li><a href="javascript:void(0);"><span>修改密码</span></a></li>
-                                    <li class="zx_active"><a href="javascript:void(0);" ng-click="logout()"><span>退出账户</span></a></li>
+                                    <li><a href="javascript:void(0);"><span>Change Password</span></a></li>
+                                    <li class="zx_active"><a href="javascript:void(0);" ng-click="logout()"><span>Logout</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -144,15 +146,21 @@
     <script src="build-scripts/services.js"></script>
     <script src="build-scripts/message_en.js"></script>
     <script src="build-scripts/message_zh.js"></script>
-    <script src="build-scripts/controllers/dataExplore/dataExplore.js"></script>
-    <script src="build-scripts/controllers/dataExplore/expert.js"></script>
-    <script src="build-scripts/controllers/homeIndex.js"></script>
 
-    <script src="build-scripts/controllers/application/list.js"></script>
+    <script src="build-scripts/controllers/rtm.js"></script>
+    <script src="build-scripts/controllers/setting.js"></script>
+    <script src="build-scripts/controllers/people.js"></script>
+    <script src="build-scripts/controllers/history.js"></script>
+    <script src="build-scripts/controllers/person.js"></script>
+    <!-- <script src="build-scripts/controllers/dataExplore/dataExplore.js"></script> -->
+    <!-- <script src="build-scripts/controllers/dataExplore/expert.js"></script> -->
+    <!-- <script src="build-scripts/controllers/homeIndex.js"></script> -->
+
+    <!-- <script src="build-scripts/controllers/application/list.js"></script>
     <script src="build-scripts/controllers/application/info.js"></script>
     <script src="build-scripts/controllers/application/details/overview.js"></script>
     <script src="build-scripts/controllers/application/details/file.js"></script>
-    <script src="build-scripts/controllers/application/details/data.js"></script>
+    <script src="build-scripts/controllers/application/details/data.js"></script> -->
     <!-- endbuild -->
 </body>
 

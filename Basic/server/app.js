@@ -63,6 +63,7 @@ app.use(bodyParser({ limit: '50mb' }));
 
 // rest api
 app.use('/api/user', require('./api/user'));
+app.use('/api/people', require('./api/people'));
 // app.use('/api/app', require('./api/app'));
 
 

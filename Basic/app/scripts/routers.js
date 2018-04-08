@@ -1,33 +1,45 @@
 'use strict';
 angular.module('basic.routers', ['ui.router'])
-  .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/');
-    let states = [{
-        name: 'index',
-        url: '/',
-        templateUrl: 'views/homeIndex.html',
-        controller: 'HomeCtrl'
-      },
-      {
-        name: 'appList',
-        url: '/apps',
-        templateUrl: 'views/application/list.html',
-        controller: 'ApplicationListCtrl'
-      },
-      {
-        name: 'appInfo',
-        url: '/app/{name}',
-        templateUrl: 'views/application/info.html',
-        controller: 'ApplicationInfoCtrl'
-      },
-      {
-        name: 'expert',
-        url: '/expert/{new}',
-        templateUrl: 'views/dataExplore/expertPart.html',
-        controller: 'ExpertCtrlTwo'
-      }
-    ];
-    states.forEach(function (state) {
-      $stateProvider.state(state);
+    .config(function($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('/');
+        let states = [{
+                name: 'index',
+                url: '/',
+                templateUrl: 'views/login.html',
+                controller: 'HomeCtrl'
+            },
+            {
+                name: 'rtm',
+                url: '/rtm',
+                templateUrl: 'views/rtm/rtm.html',
+                controller: 'RtmCtrl'
+            },
+            {
+                name: 'people',
+                url: '/people',
+                templateUrl: 'views/people.html',
+                controller: 'PeopleCtrl'
+            },
+            {
+                name: 'history',
+                url: '/history',
+                templateUrl: 'views/history.html',
+                controller: 'HistoryCtrl'
+            },
+            {
+                name: 'setting',
+                url: '/setting',
+                templateUrl: 'views/setting.html',
+                controller: 'SettingCtrl'
+            },
+            {
+                name: 'person',
+                url: '/people/{person}',
+                templateUrl: 'views/person.html',
+                controller: 'PersonCtrl'
+            }
+        ];
+        states.forEach(function(state) {
+            $stateProvider.state(state);
+        });
     });
-  });

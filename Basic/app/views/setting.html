@@ -1,0 +1,58 @@
+<div>
+    <div style="width:15%;height:100%;float:left;border-color:#e5e5e5;min-height: 700px; border-right-style: solid;border-right-width: thin">
+        <h4 align="center" style="padding: 10px;margin:auto; font-weight: bold;height:100px;">All Cameras</h4>
+        <div align="center" style="border-color: #e5e5e5;border-bottom-style: solid;border-bottom-width: thin; line-height: 50px;border-top-style: solid;border-top-width: thin;">
+            All Cameras
+        </div>
+        <div align="center" style="border-color: #e5e5e5;border-bottom-style: solid; border-bottom-width: thin; line-height: 50px;" ng-repeat="item in [1,2,3]">
+            <span style="vertical-align:middle;display: table-cell;">Camera {{item}}</span>
+        </div>
+    </div>
+    <div style="width:85%;height:100%;float:right;min-height: 700px;">
+        <div>
+            <div style="border-radius:5px;background-color:#c0ccda;padding:15px;margin:10px">
+                <!-- <div> -->
+                <div style="border-radius:5px;background-color:#f5fbff;margin-top:10px;min-height:150px;padding-top: 10px;padding-left: 10px;">
+                    <h4>Sense Server</h4>
+                    <h5>Status</h5>
+                </div>
+                <div style="border-radius:5px;background-color:#f5fbff;margin-top:15px;min-height:350px;padding-top: 10px;padding-left: 10px;padding-right: 10px;">
+                    <h4>Cameras</h4>
+                    <table class="table" style="margin-top:15px;margin-right:15px;">
+                        <thead class="thead-light" style="background-color:#eaeaea">
+                            <tr>
+                                <th scope="col">Camera</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Message</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Active</td>
+                                <td></td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Active</td>
+                                <td></td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Fail</td>
+                                <td>No Video Stream Detected</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>

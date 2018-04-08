@@ -36,16 +36,9 @@ angular
         'angular-md5'
     ])
     .constant('GLOBAL', {
-      host_getAllData: '',
-      host_cdm: '',
-      host_jupyter: './api/dataSource',
-      host_user: './api/user',
-      host_model: './api/model',
-      host_app: './api/app',
-      host_expert: './api/expert',
-      host_makefile: './api/appMakeFile',
+        host_user: './api/user',
+        host_people: './api/people'
     })
-
     .config(['$translateProvider', '$windowProvider', function($translateProvider, $windowProvider) {
         let window = $windowProvider.$get();
         let lang = window.navigator.userLanguage || window.navigator.language;
@@ -66,14 +59,13 @@ angular
             positionY: 'bottom'
         });
         usSpinnerConfigProvider.setDefaults({ color: 'orange', radius: 0 });
-
         ChartJsProvider.setOptions({
             chartColors: ['#4da9ff', '#79d2a6', '#ff9900', '#ff704d', '#669999', '#4d0000']
         });
     }])
     .run(['$rootScope', '$location', '$cookies', function($rootScope, $location, $cookies) {
-      $rootScope.showTitle = true;
-      $rootScope.nowActive = 0;
+        $rootScope.showTitle = true;
+        $rootScope.nowActive = 0;
         $rootScope.findWay = function() {
             $location.path('/explore');
         };
@@ -82,7 +74,6 @@ angular
             $rootScope.active = toState.name;
             $rootScope.username = $cookies.get('username');
         });
-        //退出
         $rootScope.logout = () => {
             $location.path('/');
         };

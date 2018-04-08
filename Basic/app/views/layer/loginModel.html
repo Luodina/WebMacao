@@ -1,29 +1,33 @@
 <div class="loginPage" id="login">
     <div class="content">
         <div class="contentModel">
-            <p class="conTitle" style="background: #ffffff;opacity: 0.95;">登录平台账号
+            <p class="conTitle" style="background: #ffffff;opacity: 0.95;">Sign In
                 <!--<span class="closeModelBtn" style="float: right;padding-right: 40px;" ng-click="cancel()"></span>-->
             </p>
             <form class="main_form" name="frm">
                 <div class="conCont" style="background: #ffffff;opacity: 0.95;">
-                    <p class="error_tit" ng-if="error_name">用户名或者密码有误，请重新输入。</p>
+                    <p class="error_tit" ng-if="error_name">The username or password is incorrect, please re-enter</p>
                     <div class="conOne">
-                        <label>{{username | translate}}</label>
-                        <span class="textRgt" ng-if="frm.username.$dirty && frm.username.$invalid">用户名不能为空</span><br/>
+                        <label>Login</label>
+                        <span class="textRgt" ng-if="frm.username.$dirty && frm.username.$invalid">
+                            Username can not be empty
+                        </span><br/>
                         <input class="ipt" name="username" autocomplete="off" type="text" ng-model="usermessage.username" tabindex="1" required>
                     </div>
                     <div class="conTwo">
-                        <label>{{password | translate}}</label>
-                        <span class="textRgt" ng-if="frm.password.$dirty && frm.password.$invalid">密码不能为空</span><br/>
+                        <label>Password</label>
+                        <span class="textRgt" ng-if="frm.password.$dirty && frm.password.$invalid">
+                            Password can not be blank
+                        </span><br/>
                         <input class="ipt" name="password" type="password" autocomplete="off" ng-model="usermessage.password" tabindex="2" ng-keydown="enterLogin($event)" required>
                     </div>
 
-                    <div class="login_forget" ng-class="{'active': isForget}" ng-click="isForget=!isForget">
+                    <!-- <div class="login_forget" ng-class="{'active': isForget}" ng-click="isForget=!isForget">
                         <i class="ta-cd no-me"></i>
-                        <p>记住用户名</p>
-                    </div>
+                        <p>Remember me</p>
+                    </div> -->
 
-                    <button class="btn" ng-click="login()">{{signin| translate}}</button>
+                    <button class="btn" ng-click="frm.$valid && login()">Sign In</button>
                     <!--<p class="footer">-->
                     <!--<span class="titleText">没有账号?<span class="titleLogin" ng-click="register()">立即注册</span></span>-->
                     <!--</p>-->

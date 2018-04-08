@@ -1,0 +1,150 @@
+<div style="margin:15px">
+    <div class="row">
+        <div class="col-lg-7 col-md-7 col-sm-7">
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-3">
+                    Date
+                </div>
+                <div class="col-lg-10 col-md-9 col-sm-9" style="padding-left: 0px;padding-right: 10px;">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <p class="input-group">
+                            <input type="text" class="form-control" datetime-picker="yyyy-MM-dd HH:mm" required timepicker-options="{showMeridian: false}" button-bar="false" ng-model="period.start" is-open="period.start" datepicker-append-to-body="true">
+                            <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="period.start = true;" style="margin-top: 0px;">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="padding-left: 10px;padding-right: 10px;">
+                        <p class="input-group">
+                            <input type="text" class="form-control" datetime-picker="yyyy-MM-dd HH:mm" required timepicker-options="{showMeridian: false}" button-bar="false" ng-model="period.start" is-open="period.finish" datepicker-append-to-body="true">
+                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="period.finish = true;" style="margin-top: 0px;">
+                                            <i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    Location
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="border-radius:4px">
+                    </div>
+                    <!-- <input class="form-group" type="text" ng-model="location"> -->
+                </div>
+            </div>
+            <div class="row" style="margin-top: 15px; padding-left: 15px;">
+                <button type="button" class="btn btn-primary" style="margin-top: 0px;">Filter</button>
+                <button type="button" class="btn btn-primary" style="margin-top: 0px;">Reset</button>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        Camera
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <select class="form-control" id="sel1">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                              </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    Similarity
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">All</label>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5">
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">High</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Medium</label>
+                    </div>
+                    <div class="checkbox disabled">
+                        <label><input type="checkbox" value="" disabled>Low</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="padding-left: 15px; padding-right: 15px; margin-top: 15px;">
+        <table class="table">
+            <thead class="thead-light" style="background-color:#eaeaea">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Captured Image</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Similarity</th>
+                    <th scope="col">Camera</th>
+                    <th scope="col">Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

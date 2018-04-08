@@ -13,23 +13,27 @@ let isUUID = require('is-uuid');
 //let logger = require('../utils/log')('./api/users.js');
 // 用户登录，发放token
 router.post('/login', function(req, res) {
+
     let username = req.body.username;
     let pass = req.body.password;
     if (username && pass) {
         User.findOne({
-            attributes: ['USER_ID', 'USER_NAME', 'PASSWORD'],
+            attributes: ['USER_ID', 'USER_NAME', 'USER_PASSWORD'],
             where: {
                 USER_NAME: username
             },
             raw: true
         }).then(function(user) {
+            console.log("user from DB", user, 'pass', pass)
             if (!user) {
                 res.status(403).send({ status: false, msg: 'Username not found' });
             } else {
-                if (user.PASSWORD !== pass) {
+                console.log("!!!!!", user.USER_PASSWORD !== pass)
+                if (user.USER_PASSWORD !== pass) {
                     res.status(403).send({ status: false, msg: 'Invalid password' });
                 } else {
                     var token = auth.encode(user.USER_NAME);
+                    console.log("token", token)
                     res.setHeader('Set-Cookie', ['aura_token=' + token]);
                     res.status(200).send({ status: true, token: token });
                 }

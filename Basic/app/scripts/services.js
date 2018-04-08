@@ -533,34 +533,34 @@ angular.module('basic.services', ['ui.bootstrap'])
                         };
                         // 点击按钮进入页面
                         $scope.login = () => {
-                            $location.path('/apps');
-                            // if ($scope.usermessage.password !== undefined) {
-                            //   $scope.usermessage.password = md5.createHash($scope.usermessage.password);
-                            //   $rootScope.login($scope.usermessage.username, $scope.usermessage.password);
-                            // }
+                            console.log('LOGIN :', $scope.usermessage.password);
+                            if ($scope.usermessage.password !== undefined) {
+                                $scope.usermessage.password = md5.createHash($scope.usermessage.password);
+                                $rootScope.login($scope.usermessage.username, $scope.usermessage.password);
+                            }
                         };
                         //登录接口
                         $rootScope.login = (username, password) => {
-                            // $http.post('/api/user/login/', {username, password}).success(function (user) {
-                            //   $rootScope.error_name = false;
-                            //   if (user.status) {
-                            console.log('LOGIN SUCCESS!');
-                            //     $cookies.put('username', username);
-                            //     //将token加入cookie
-                            //     $cookies.put('aura_token', user.token);
-                            $uibModalInstance.dismiss();
-                            //     // $location.path('/expert/new').search({
-                            //     //   kernel: 'python2',
-                            //     //   name: 'XXX'
-                            //     // });
-                            //     $rootScope.iflogin = true;
-                            //     $rootScope.username = $cookies.get('username');
-                            $location.path('/apps');
-                            //   } else {
-                            //     $rootScope.error_name = true;
-                            //     //console.log('LOGIN FAILED!please, use login name:ocai and pass:123456');
-                            //   }
-                            // });
+                            $http.post('/api/user/login/', { username, password }).success(function(user) {
+                                $rootScope.error_name = false;
+                                if (user.status) {
+
+                                    $cookies.put('username', username);
+                                    //将token加入cookie
+                                    $cookies.put('aura_token', user.token);
+                                    $uibModalInstance.dismiss();
+                                    // $location.path('/expert/new').search({
+                                    //   kernel: 'python2',
+                                    //   name: 'XXX'
+                                    // });
+                                    $rootScope.iflogin = true;
+                                    $rootScope.username = $cookies.get('username');
+                                    $location.path('/rtm');
+                                } else {
+                                    $rootScope.error_name = true;
+                                    console.log('LOGIN FAILED!please, use login name:ocai and pass:123456');
+                                }
+                            });
                         };
 
                         $scope.cancel = function() {
