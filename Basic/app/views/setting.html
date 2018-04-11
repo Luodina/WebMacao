@@ -1,58 +1,60 @@
 <div>
-    <div style="width:15%;height:100%;float:left;border-color:#e5e5e5;min-height: 700px; border-right-style: solid;border-right-width: thin">
-        <h4 align="center" style="padding: 10px;margin:auto; font-weight: bold;height:100px;">All Cameras</h4>
-        <div align="center" style="border-color: #e5e5e5;border-bottom-style: solid;border-bottom-width: thin; line-height: 50px;border-top-style: solid;border-top-width: thin;">
-            All Cameras
+    <div class="setting-menu">
+        <div align="center" ng-class="{'active' : tab == 1}" ng-click="clicked(1)" class="setting-menu-tab">
+            System Setting
         </div>
-        <div align="center" style="border-color: #e5e5e5;border-bottom-style: solid; border-bottom-width: thin; line-height: 50px;" ng-repeat="item in [1,2,3]">
-            <span style="vertical-align:middle;display: table-cell;">Camera {{item}}</span>
+        <div align="center" ng-click="userManagementShow()" class="setting-menu-tab">
+            User Management
+            <i ng-show="!isUserManagementShow" class="glyphicon glyphicon-menu-down"></i>
+            <i ng-show="isUserManagementShow" class="glyphicon glyphicon-menu-up"></i>
+        </div>
+        <div ng-show="isUserManagementShow" align="center" ng-class="{'active' : tab == 2}" ng-click="clicked(2)" class="setting-menu-tab">
+            Add User
+        </div>
+        <div ng-show="isUserManagementShow" align="center" ng-class="{'active' : tab == 3}" ng-click="clicked(3)" class="setting-menu-tab">
+            Search User
+        </div>
+        <div align="center" ng-click="cameraSettingShow()" class="setting-menu-tab">
+            Camera Setting
+            <i ng-show="!isCameraSettingShow" class="glyphicon glyphicon-menu-down"></i>
+            <i ng-show="isCameraSettingShow" class="glyphicon glyphicon-menu-up"></i>
+        </div>
+        <div align="center" ng-show="isCameraSettingShow" ng-class="{'active' : tab == 4}" ng-click="clicked(4)" class="setting-menu-tab">
+            Add Camera
+        </div>
+        <div align="center" ng-show="isCameraSettingShow" ng-repeat="camera in cameras" class="setting-menu-tab" ng-class="{'active' : tab == 5}" ng-click="clicked(5)">
+            <span style="vertical-align:middle;display: table-cell;">Camera {{camera.name}}</span>
         </div>
     </div>
     <div style="width:85%;height:100%;float:right;min-height: 700px;">
-        <div>
-            <div style="border-radius:5px;background-color:#c0ccda;padding:15px;margin:10px">
-                <!-- <div> -->
-                <div style="border-radius:5px;background-color:#f5fbff;margin-top:10px;min-height:150px;padding-top: 10px;padding-left: 10px;">
-                    <h4>Sense Server</h4>
-                    <h5>Status</h5>
-                </div>
-                <div style="border-radius:5px;background-color:#f5fbff;margin-top:15px;min-height:350px;padding-top: 10px;padding-left: 10px;padding-right: 10px;">
-                    <h4>Cameras</h4>
-                    <table class="table" style="margin-top:15px;margin-right:15px;">
-                        <thead class="thead-light" style="background-color:#eaeaea">
-                            <tr>
-                                <th scope="col">Camera</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Message</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Active</td>
-                                <td></td>
-
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Active</td>
-                                <td></td>
-
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Fail</td>
-                                <td>No Video Stream Detected</td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <div ng-show='tab == 0'>
+            <div ng-controller="SettingMainCtrl">
+                <div setting-main class="setting-main"></div>
             </div>
         </div>
-
+        <div ng-show='tab == 1'>
+            <div ng-controller="SysSettingCtrl">
+                <div sys-setting class="sys-setting "></div>
+            </div>
+        </div>
+        <div ng-show='tab == 2'>
+            <div ng-controller="AddUserCtrl">
+                <div add-user class="add-user"></div>
+            </div>
+        </div>
+        <div ng-show='tab == 3'>
+            <div ng-controller="SearchUserCtrl">
+                <div search-user></div>
+            </div>
+        </div>
+        <div ng-show='tab == 4'>
+            <div ng-controller="AddCameraCtrl">
+                <div add-camera class="add-camera"></div>
+            </div>
+        </div>
     </div>
 
 </div>
+
 </div>
+</div>s

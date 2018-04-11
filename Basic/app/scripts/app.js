@@ -41,8 +41,8 @@ angular
     })
     .config(['$translateProvider', '$windowProvider', function($translateProvider, $windowProvider) {
         let window = $windowProvider.$get();
-        let lang = window.navigator.userLanguage || window.navigator.language;
-        console.log('lang', lang);
+        //let lang = window.navigator.userLanguage || window.navigator.language;
+        let lang = 'zh';
         if (lang) {
             lang = lang.substr(0, 2);
             $translateProvider.preferredLanguage(lang);

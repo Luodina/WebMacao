@@ -1,0 +1,22 @@
+<div style="padding-top:20px">
+    <table class="table" style="width:80%; margin:auto;">
+        <thead class="thead-light" style="background-color:#eaeaea">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Role</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users">
+                <td>{{user.name}}</th>
+                    <td>{{user.role}}</td>
+                    <td>{{user.status}}</td>
+                    <td>
+                        <button type="button" ng-click="userEdit(user)" class="btn btn-primary">Edit</button>
+                    </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

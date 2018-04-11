@@ -1,14 +1,9 @@
 'use strict';
-let sequelize = require('../sequelize');
-let Sequelize = require('sequelize');
-let User = require('../model/USER_INFO')(sequelize, Sequelize);
 let express = require('express');
 let router = express.Router();
 let auth = require('../utils/auth');
 const config = require('./../config');
-let url = require('url');
 let env = config.env || 'dev';
-let isUUID = require('is-uuid');
 
 router.get('/rtm', function(req, res) {
     let rtm = { id: '123456789', name: 'Kitty', age: '5', foto: 'https://sanrio-production-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTYvMDYvMTQvMjAvNDgvMzQvMTM3L2NocmFjdGVyX2hlbGxvX2tpdHR5LmpwZyJdXQ/chracter-hello-kitty.jpg?sha=f5e7c272d3fc6e78' };

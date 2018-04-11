@@ -30,7 +30,8 @@
     <link rel="stylesheet" href="bower_components/mermaid/dist/mermaid.dark.css" />
     <link rel="stylesheet" href="bower_components/jquery-ui/themes/ui-lightness/jquery-ui.css" />
     <link rel="stylesheet" href="styles/rtm/rtm.css" />
-    <link rel="stylesheet" href="styles/dataApp/dataApp.css" />
+    <link rel="stylesheet" href="styles/setting.css" />
+    <link rel="stylesheet" href="styles/sysSetting.css" />
     <!-- endbuild -->
 </head>
 
@@ -51,7 +52,7 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-head" id="js-navbar-collapse">
                     <div class="nav navbar-nav navbar-left nav-top" id="navbar-nav">
-                        <a ng-class="{true: 'active'}[active == 'rtm']" ui-sref='rtm'>Real Time Monitoring</a>
+                        <a ng-class="{true: 'active'}[active == 'rtm']" ui-sref='rtm'>{{'web_common_000'| translate }}</a>
                         <a ng-class="{true: 'active'}[active == 'people']" ui-sref="people">Registered People</a>
                         <a ng-class="{true: 'active'}[active == 'history']" ui-sref="history">Capture History</a>
                         <a ng-class="{true: 'active'}[active == 'setting']" ui-sref="setting">Setting</a>
@@ -152,9 +153,14 @@
     <script src="build-scripts/controllers/people.js"></script>
     <script src="build-scripts/controllers/history.js"></script>
     <script src="build-scripts/controllers/person.js"></script>
-    <!-- <script src="build-scripts/controllers/dataExplore/dataExplore.js"></script> -->
-    <!-- <script src="build-scripts/controllers/dataExplore/expert.js"></script> -->
-    <!-- <script src="build-scripts/controllers/homeIndex.js"></script> -->
+
+    <script src="build-scripts/directive/addUser.js"></script>
+    <script src="build-scripts/directive/addCamera.js"></script>
+    <script src="build-scripts/directive/settingMain.js"></script>
+    <script src="build-scripts/directive/searchUser.js"></script>
+    <script src="build-scripts/directive/sysSetting.js"></script>
+
+    <script src="build-scripts/controllers/homeIndex.js"></script>
 
     <!-- <script src="build-scripts/controllers/application/list.js"></script>
     <script src="build-scripts/controllers/application/info.js"></script>

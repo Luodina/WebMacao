@@ -4,14 +4,21 @@ import bodyParser from 'body-parser';
 import config from './config';
 import path from 'path';
 import favicon from 'serve-favicon';
-import proxy from 'http-proxy-middleware';
+//import proxy from 'http-proxy-middleware';
 import cookieParser from 'cookie-parser';
 
 let app = express();
 let env = config.env || 'dev';
+
+// var jwt = require('express-jwt');
+// var auth = jwt({
+//     secret: 'MY_SECRET',
+//     userProperty: 'payload'
+// });
+
 // use logger.xxx instead of console.xxx
 // let logger = require('./utils/log')('app.js');
-let auth = require('./utils/auth');
+//let auth = require('./utils/auth');
 
 if (env === 'dev') {
     app.use(require('connect-livereload')());
@@ -23,14 +30,6 @@ if (env === 'dev') {
 app.use(express.static(config[env].dist));
 app.use(favicon(path.join(__dirname, '../', config[env].dist, '/favicon.ico')));
 
-//proxy notebook request, has to above bodyparser to enable proxy post request
-// app.use('/lab', proxy({
-//     headers: { 'Authorization': 'token ' + config[env].token },
-//     target: config[env].notebookUrl,
-//     logLevel: 'debug',
-//     changeOrigin: true,
-//     ws: true
-// }));
 
 app.use(cookieParser()); // to support cookie
 app.use(bodyParser({ limit: '50mb' }));
@@ -64,7 +63,7 @@ app.use(bodyParser({ limit: '50mb' }));
 // rest api
 app.use('/api/user', require('./api/user'));
 app.use('/api/people', require('./api/people'));
-// app.use('/api/app', require('./api/app'));
+app.use('/api/camera', require('./api/camera'));
 
 
 app.get('*', function(req, res) {
@@ -73,7 +72,6 @@ app.get('*', function(req, res) {
 
 app.listen(config[env].port, function() {
     console.log('App listening on port ' + config[env].port + '!');
-    // logger.info('App listening on port ' + config[env].port + '!');
 });
 
 module.exports = app;

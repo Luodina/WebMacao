@@ -1,0 +1,52 @@
+<div>
+    <form name="frm">
+        <div style="margin:auto;width:400px">
+            <h4 style="margin-top:20px">Add Camera</h4>
+            <div style="margin-top:20px">
+                <div style="float:left;height:34px;vertical-align:middle;width:40%">
+                    <label>Name</label>
+                </div>
+                <div style="float:right;width:60%">
+                    <input type="text" ng-model="camera.name" class="form-control" placeholder="Name" aria-describedby="basic-addon1" style="border-radius:4px">
+                </div>
+            </div>
+            <div style="margin-bottom:20px">
+                <div style="float:left;height:34px;width:40%">
+                    <label>Location</label>
+                </div>
+                <div style="float:right;width:60%">
+                    <input type="text" ng-model="camera.location" class="form-control" placeholder="Location" aria-describedby="basic-addon1" style="border-radius:4px">
+                </div>
+            </div>
+            <div style="margin-bottom:20px">
+                <div style="float:left;height:34px;width:40%">
+                    <label>RTSP URL</label>
+                </div>
+                <div style="float:right;width:60%">
+                    <input type="text" ng-model="camera.rtsp" class="form-control" placeholder="RTSP URL" aria-describedby="basic-addon1" style="border-radius:4px">
+                </div>
+            </div>
+            <div>
+                <div style="float:left;height:34px;width:40%">
+                    <label>Status </label>
+                </div>
+                <div style="float:right;width:60%" class="checkbox">
+                    <label><input type="checkbox" ng-model="camera.status" value="">Active</label>
+                </div>
+            </div>
+            <div>
+                <div style="float:left;height:34px;width:40%">
+                    <label>Remarks</label>
+                </div>
+                <div style="float:right;width:60%">
+                    <textarea class="form-control" ng-model="camera.remarks" rows="3" placeholder="Remarks"></textarea>
+                </div>
+            </div>
+            <div>
+                <!-- <button style="float:left;" class="btn" ng-click="frm.$valid && addCamera()">Add</button> -->
+                <button style="float:left;" class="btn" ng-click="addCamera()" ui-sref="setting">Add</button>
+                <button style="float:right;" class="btn" ng-click="" ui-sref="setting">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -4,14 +4,14 @@ let UUID = require('uuid');
 let SECRET = '1234';
 const THREE_HOURS = 60 * 60 * 3; // Seconds in 3 hours
 
-function init() {
-    // TODO: a more complex SECRET??
-    let opts = {
-        msec: new Date('2017-09-15').getTime(),
-        nsecs: 5390
-    };
-    SECRET = UUID.v1('123456');
-}
+// function init() {
+//     // TODO: a more complex SECRET??
+//     let opts = {
+//         msec: new Date('2017-09-15').getTime(),
+//         nsecs: 5390
+//     };
+//     SECRET = UUID.v1('123456');
+// }
 
 // init();
 

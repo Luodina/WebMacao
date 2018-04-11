@@ -1,0 +1,63 @@
+<div>
+    <form name="frm">
+        <div style="margin:auto;width:400px">
+            <h4 style="margin-top:20px">{{msg}}</h4>
+            <div style="margin-top:20px">
+                <div style="float:left;height:34px;vertical-align:middle;width:40%">
+                    <label>Username</label>
+                </div>
+                <div style="float:right;width:60%">
+                    <input type="text" ng-model="user.name" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="border-radius:4px">
+                </div>
+            </div>
+            <div style="margin-bottom:20px">
+                <div style="float:left;height:34px;width:40%">
+                    <label>Password</label>
+                </div>
+                <div style="float:right;width:60%">
+                    <input type="text" ng-model="user.password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" style="border-radius:4px">
+                </div>
+            </div>
+            <div style="margin-bottom:20px">
+                <div style="float:left;height:34px;width:40%">
+                    <label>Confirm Password</label>
+                </div>
+                <div style="float:right;width:60%">
+                    <input type="text" class="form-control" placeholder="The same as password" aria-describedby="basic-addon1" style="border-radius:4px">
+                </div>
+            </div>
+            <div>
+                <div style="float:left;height:34px;width:40%">
+                    <label>Status </label>
+                </div>
+                <div style="float:right;width:60%" class="checkbox">
+                    <label><input type="checkbox" ng-model="user.status" value="">Active</label>
+                </div>
+            </div>
+            <div>
+                <div style="float:left;height:34px;width:40%">
+                    <label>User Role</label>
+                </div>
+                <div style="float:right;width:60%">
+                    <div class="input-group">
+                        <input type="text" ng-model="user.role" class="form-control" aria-label="Text input with dropdown button">
+                        <!-- <div class="input-group-btn">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action
+                          </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button style="float:left;" class="btn" ng-click="frm.$valid && addNewUser()">Add</button>
+                <button style="float:right;" class="btn" ng-click="" ui-sref="setting">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
