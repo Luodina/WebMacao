@@ -56,7 +56,7 @@
             </div>
             <div>
                 <button style="float:left;" class="btn" ng-click="frm.$valid && addNewUser()">Add</button>
-                <button style="float:right;" class="btn" ng-click="" ui-sref="setting">Cancel</button>
+                <button style="float:right;" class="btn" ui-sref="setting" ui-sref-opts="{reload: true, notify: true}">Cancel</button>
             </div>
         </div>
     </form>

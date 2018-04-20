@@ -37,7 +37,9 @@ angular
     ])
     .constant('GLOBAL', {
         host_user: './api/user',
-        host_people: './api/people'
+        host_people: './api/people',
+        STserver: './api/st',
+        db: './api/db'
     })
     .config(['$translateProvider', '$windowProvider', function($translateProvider, $windowProvider) {
         let window = $windowProvider.$get();
@@ -70,7 +72,6 @@ angular
             $location.path('/explore');
         };
         $rootScope.$on('$stateChangeStart', function(toState) {
-            console.log('toState', toState.name);
             $rootScope.active = toState.name;
             $rootScope.username = $cookies.get('username');
         });

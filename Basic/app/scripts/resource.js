@@ -1,9 +1,5 @@
 'use strict';
 angular.module('basic.resource', ['ngResource'])
-    .factory('getAllData', ['$resource', 'GLOBAL', function($resource, GLOBAL) {
-        let getAllData = $resource(GLOBAL.host_getAllData + '/datasets', {}, {});
-        return getAllData;
-    }])
     .factory('fromdbFace', ['$resource', 'GLOBAL', function($resource, GLOBAL) {
         let fromdbFace = $resource(GLOBAL.host_people + '/fromdb', {}, {});
         return fromdbFace;
@@ -12,8 +8,33 @@ angular.module('basic.resource', ['ngResource'])
         let rtmFace = $resource(GLOBAL.host_people + '/rtm', {}, {});
         return rtmFace;
     }])
+    .factory('DBcameras', ['$resource', 'GLOBAL', function($resource, GLOBAL) {
+        let DBcameras = $resource(GLOBAL.db + '/camera/:name', { name: '@name' }, {
+            create: { method: 'POST' },
+            del: { method: 'DELETE' },
+            update: { method: 'PUT' }
+        });
+        return DBcameras;
+    }])
+    .factory('STtasks', ['$resource', 'GLOBAL', function($resource, GLOBAL) {
+        let STtasks = $resource('/api/st/Task/QueryResource?ProjectID=1000', {}, {});
+        return STtasks;
 
-.factory('makefileList', ['$resource', 'GLOBAL', function($resource, GLOBAL) {
-    let makefileList = $resource(GLOBAL.host_makefile + '/getMakeFileList/:appName', { appName: '@appName' }, {});
-    return makefileList;
-}]);
+    }])
+    .factory('STtaskInfo', ['$resource', 'GLOBAL', '$q', function($resource, GLOBAL, $q) {
+        let STtaskInfo = $resource('/api/st/Task/GetTaskInfo', { taskID: '@taskID' }, {});
+        return STtaskInfo;
+    }])
+    .factory('STtasksCreate', ['$resource', 'GLOBAL', function($resource, GLOBAL) {
+        let STtasksCreate = $resource('/api/st/Task/CreateTask?ProjectID=1000', {}, {
+            create: { method: 'POST' }
+        });
+        return STtasksCreate;
+
+    }])
+    .factory('STtasksDel', ['$resource', 'GLOBAL', function($resource, GLOBAL) {
+        let STtasksDel = $resource('/api/st/Task/DeleteTask', {}, {
+            del: { method: 'POST' }
+        });
+        return STtasksDel;
+    }]);

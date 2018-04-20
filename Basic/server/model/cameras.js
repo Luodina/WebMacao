@@ -2,7 +2,6 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
-console.log("in cameras.js")
 
 var Schema = new mongoose.Schema({
     name: {
@@ -19,12 +18,24 @@ var Schema = new mongoose.Schema({
         required: true
     },
     status: {
-        type: String,
+        type: Boolean,
         required: true
     },
     remarks: {
         type: String,
         required: false
+    },
+    taskid: {
+        type: String,
+        required: false
+    },
+    create_date: {
+        type: Date,
+        default: Date.now
+    },
+    del_date: {
+        type: Date,
+        default: ''
     }
 });
 

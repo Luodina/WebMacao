@@ -55,19 +55,9 @@
                         <a ng-class="{true: 'active'}[active == 'rtm']" ui-sref='rtm'>{{'web_common_000'| translate }}</a>
                         <a ng-class="{true: 'active'}[active == 'people']" ui-sref="people">Registered People</a>
                         <a ng-class="{true: 'active'}[active == 'history']" ui-sref="history">Capture History</a>
-                        <a ng-class="{true: 'active'}[active == 'setting']" ui-sref="setting">Setting</a>
-                        <!--<a ng-class="{true: 'active'}[active == 'settings']" ui-sref="settings">{{'web_common_005' | translate}}</a>-->
+                        <a ng-class="{true: 'active'}[active == 'setting']" ui-sref="setting" ui-sref-opts="{reload: true, notify: true}">Setting</a>
                     </div>
-                    <!--<div ng-if="!isshow && appInfoShow" style="display: inline-block;line-height: 52px;font-size: 16px;margin-left: 10px">-->
-                    <!--<span ui-sref="home">{{username}}</span> / {{modelAppName}}-->
-                    <!--</div>-->
-                    <!--<div ng-if="!isshow && expertShow" style="display: inline-block;line-height: 52px;font-size: 16px;margin-left: 10px">-->
-                    <!--<span ng-click="findWay">{{username}}</span>-->
-                    <!--<span ng-click="findWay(index)">/ {{exploreName | translate}} </span>-->
-                    <!--<span>/ {{modelExpertName}}</span>-->
-                    <!--</div>-->
                     <div class="navbar-right">
-                        <!-- <span class="help_tit">帮助</span> -->
                         <div class="data_bg header_area_select head_index">
                             <div uib-dropdown="" on-toggle="toggled(open)" class="dropdown open">
                                 <a href="javascript:void(0);" class="per_block dropdown-toggle" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="true">

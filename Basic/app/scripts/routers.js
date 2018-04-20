@@ -30,7 +30,19 @@ angular.module('basic.routers', ['ui.router'])
                 name: 'setting',
                 url: '/setting',
                 templateUrl: 'views/setting.html',
-                controller: 'SettingCtrl'
+                controller: 'SettingCtrl',
+                resolve: {
+                    tasks: ['STtasks',
+                        function(STtasks) {
+                            return STtasks.get({}).$promise;
+                        }
+                    ],
+                    cameras: ['DBcameras',
+                        function(DBcameras) {
+                            return DBcameras.query({}).$promise;
+                        }
+                    ]
+                }
             },
             {
                 name: 'person',

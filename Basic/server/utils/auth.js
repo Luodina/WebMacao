@@ -1,6 +1,6 @@
 'use strict';
 let jwt = require('jsonwebtoken');
-let UUID = require('uuid');
+//let UUID = require('uuid');
 let SECRET = '1234';
 const THREE_HOURS = 60 * 60 * 3; // Seconds in 3 hours
 

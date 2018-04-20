@@ -22,14 +22,38 @@
         <div align="center" ng-show="isCameraSettingShow" ng-class="{'active' : tab == 4}" ng-click="clicked(4)" class="setting-menu-tab">
             Add Camera
         </div>
-        <div align="center" ng-show="isCameraSettingShow" ng-repeat="camera in cameras" class="setting-menu-tab" ng-class="{'active' : tab == 5}" ng-click="clicked(5)">
+        <div align="center" ng-show="isCameraSettingShow" ng-repeat="camera in cameras" class="setting-menu-tab" ng-class="{'active' : tab == 4}" ng-click="clicked(4,camera)">
             <span style="vertical-align:middle;display: table-cell;">Camera {{camera.name}}</span>
         </div>
     </div>
     <div style="width:85%;height:100%;float:right;min-height: 700px;">
-        <div ng-show='tab == 0'>
-            <div ng-controller="SettingMainCtrl">
-                <div setting-main class="setting-main"></div>
+        <div ng-init="tab == 0" ng-show='tab == 0'>
+            <div>
+                <div style="margin:10px">
+                    <div style="border-radius:5px;background-color:rgb(236, 233, 233);;margin-top:10px;min-height:150px;padding-top: 10px;padding-left: 10px;">
+                        <h4>Sense Server</h4>
+                        <h5>Status</h5>
+                    </div>
+                    <div style="border-radius:5px;background-color:rgb(236, 233, 233);;margin-top:15px;min-height:350px;padding-top: 10px;padding-left: 10px;padding-right: 10px;">
+                        <h4>Cameras</h4>
+                        <table class="table" style="margin-top:15px;margin-right:15px;">
+                            <thead class="thead-light" style="background-color:#eaeaea">
+                                <tr>
+                                    <th scope="col">Camera</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Message</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="camera in cameras">
+                                    <th>{{camera.name}}</th>
+                                    <td>{{camera.statusShow}}</td>
+                                    <td>{{camera.remarks}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
         <div ng-show='tab == 1'>
