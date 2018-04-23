@@ -1,7 +1,7 @@
 'use strict';
 angular.module('basic')
-    .controller('RtmCtrl', ['createApp', '$rootScope', '$scope', '$filter', 'fromdbFace', 'rtmFace',
-        (createApp, $rootScope, $scope, $filter, fromdbFace, rtmFace) => {
+    .controller('RtmCtrl', ['$rootScope', '$scope', '$filter', 'fromdbFace', 'rtmFace',
+        ($rootScope, $scope, $filter, fromdbFace, rtmFace) => {
             $scope.rtm = {};
             $scope.fromdb = [];
             let handleSuccess = function(data) {
