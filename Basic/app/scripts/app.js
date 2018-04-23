@@ -30,8 +30,6 @@ angular
         'ui.router.state.events',
         'angularFileUpload',
         'hc.marked',
-        'ipCookie',
-        'ui.codemirror',
         'smart-table',
         'angular-md5'
     ])
@@ -67,10 +65,6 @@ angular
     }])
     .run(['$rootScope', '$location', '$cookies', function($rootScope, $location, $cookies) {
         $rootScope.showTitle = true;
-        $rootScope.nowActive = 0;
-        $rootScope.findWay = function() {
-            $location.path('/explore');
-        };
         $rootScope.$on('$stateChangeStart', function(toState) {
             $rootScope.active = toState.name;
             $rootScope.username = $cookies.get('username');
