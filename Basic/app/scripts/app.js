@@ -75,4 +75,11 @@ angular
         $rootScope.getUsername = () => {
             return $cookies.get('username');
         };
-    }]);
+    }])
+    // .run(function($state) {
+    //     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+    //         event.preventDefault();
+    //         $state.go('error');
+    //         console.log('Here we are!')
+    //     });
+    // });

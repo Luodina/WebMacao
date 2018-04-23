@@ -1,74 +1,76 @@
-<div>
-    <div style="width:15%;height:100%;float:left;border-color:#e5e5e5;min-height: 700px; border-right-style: solid;border-right-width: thin">
-        <h4 align="center" style="padding: 10px;margin:auto; font-weight: bold;height:100px;">{{'web_common_001'| translate}}</h4>
-        <div align="center" style="border-color: #e5e5e5;border-bottom-style: solid;border-bottom-width: thin; line-height: 50px;border-top-style: solid;border-top-width: thin;">
-            All Cameras
-        </div>
-        <div align="center" style="border-color: #e5e5e5;border-bottom-style: solid; border-bottom-width: thin; line-height: 50px;" ng-repeat="item in [1,2,3]">
-            <span style="vertical-align:middle;display: table-cell;">Camera {{item}}</span>
-        </div>
-    </div>
-    <div style="width:85%;height:100%;float:right;min-height: 700px;">
-        <div style="float:left;width:60%;">
-            <div style="border-radius:5px;background-color:#c0ccda;padding:15px;margin:10px">
-                <h4>Captured People - Registered</h4>
-                <div style="border-radius:5px;background-color:#f5fbff;margin-top:10px;min-height:150px;padding-top: 10px;padding-left: 10px;">
-                    <div style="float:left;vertical-align:center">
-                        <img src={{rtm.foto}} width="100px" height="100px">
-                    </div>
-                    <div style="float:left;">
-                        <span>{{rtm.name}}</span>
-                        <span>{{rtm.name}}</span>
-                        <span>{{rtm.name}}</span>
-                        <span>{{rtm.name}}</span>
-                        <span>{{rtm.name}}</span>
-                    </div>
-                    <button type="button" ui-sref="person({person:rtm.id})" class="btn btn-primary">Details</button>
-                </div>
-                <div style="border-radius:5px;background-color:#f5fbff;margin-top:15px;min-height:350px;padding-top: 10px;padding-left: 10px;">
-                    <h4>History</h4>
-                    <div style="width: 33%;float:left; min-height:140px; margin-top:10px;" ng-repeat="item in fromdb ">
-                        <div>
-                            <div style="height: 100px;">
-                                <img src={{item.foto}} width="100px" height="100px">
-                            </div>
-                            <div class="height: 20px; ">
-                                <span>{{item.name}}</span>
-                            </div>
-                            <div class="height: 20px; ">
-                                <span>{{item.age}}</span>
-                            </div>
+<div style="box-sizing: border-box;">
+    <div style="min-height: 620px;margin:10px;">
+        <div style="width:74%;float:left;background-color:#c0ccda;border-radius:5px;padding: 15px;">
+            <div style="min-height:400px;">
+                <!-- <h4>Captured People - Registered</h4> -->
+                <!-- tyle="border-radius:5px;background-color:#c0ccda;padding:15px; -->
+                <div style="float:left;padding-left: 30px;">
+                    <!-- <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                  Dropdown
+                                  <span class="caret"></span>
+                                </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div> -->
+                    <div>
+                        <h4 align="center" style="padding: 10px;margin:auto; font-weight: bold;height:100px;">{{'web_common_001'| translate}}</h4>
+                        <!-- <div align="center" style="border-color: #e5e5e5;border-bottom-style: solid;border-bottom-width: thin; line-height: 50px;border-top-style: solid;border-top-width: thin;">
+                            Cameras
+                        </div> -->
+                        <div align="center" style="border-color: #e5e5e5;border-bottom-style: solid; border-bottom-width: thin; line-height: 50px;" ng-repeat="item in [1,2,3]">
+                            <span style="vertical-align:middle;display: table-cell;">Camera {{item}}</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div style="width:40%;float:right; ">
-            <div style="border-radius:5px;background-color:#c0ccda;padding:15px;margin:10px ">
-                <h4>Captured People - Non-Registered</h4>
-                <div style="border-radius:5px;background-color:#f5fbff;margin-top:10px;min-height:150px;padding-top: 10px;padding-left: 10px;">
-                    <span>{{rtm.name}}</span>
-                    <img src={{rtm.foto}} width="100px" height="100px">
-                </div>
-                <div style="border-radius:5px;background-color:#f5fbff;margin-top:15px;min-height:350px;padding-top: 10px;padding-left: 10px;">
-                    <h4>History</h4>
-                    <div style="width: 33%;float:left; min-height:140px; margin-top:10px;" ng-repeat="item in fromdb ">
-                        <div>
-                            <div style="height: 100px;">
-                                <img src={{item.foto}} width="100px" height="100px">
-                            </div>
-                            <div class="height: 20px; ">
-                                <span>{{item.name}}</span>
-                            </div>
-                            <div class="height: 20px; ">
-                                <span>{{item.age}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                <div style="width:75%;float:right;border-radius:5px;background-color:#f5fbff;min-height:400px;">
 
+                </div>
+            </div>
+            <div style="width:100%;border-radius:5px;background-color:#f5fbff;height:200px;padding: 10px;margin-top:15px;">
+                <h4>Non-registered</h4>
+                <div style="float:left; min-height:150px;margin-top: 10px; margin-right:10px;" ng-repeat="item in fromdb ">
+                    <div>
+                        <div style="height: 50px;">
+                            <img src={{item.foto}} width="100px" height="50px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width:25%;float:right;">
+            <div style="border-radius:5px;background-color:#c0ccda;padding:15px;">
+                <div style="border-radius:5px;background-color:#f5fbff;height:620px;padding: 15px;overflow:scroll;">
+                    <h4>Registered</h4>
+                    <div style="min-height:120px; margin-top:10px;border-color: #c0ccda;border-bottom-style: solid;border-bottom-width: thin;" ng-repeat="item in fromdb ">
+                        <div style="width:50%;float:left;">
+                            <div style="height: 100px;">
+                                <img src={{item.foto}} width="100px" height="100px">
+                            </div>
+                        </div>
+                        <div style="width:50%;float:right;height:100px;">
+                            <div style="height: 25%;">
+                                <span>Name {{item.name}}</span>
+                            </div>
+                            <div style="height: 25%;">
+                                <span>Alt Name  {{item.age}}</span>
+                            </div>
+                            <div style="height: 25%;">
+                                Time {{item.age}}
+                            </div>
+                            <div style="height: 25%;">
+                                Location
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </div>

@@ -34,7 +34,24 @@ angular.module('basic.routers', ['ui.router'])
                 resolve: {
                     tasks: ['STtasks',
                         function(STtasks) {
-                            return STtasks.get({}).$promise;
+                            // return STtasks.get({}).$promise;
+                            return STtasks.get({}).$promise
+                                .then(function(data) {
+                                    // success handler 
+                                    console.log('data', data)
+                                    return data;
+                                })
+                                .catch(function(error) {
+                                    console.log('error', error)
+                                        // error handler
+                                    return { resolveError: error };
+                                })
+                                // .then(function(error) {
+                                //     // success handler 
+                                //     console.log('error2', error)
+                                //         // error handler
+                                //     return { resolveError: error };
+                                // })
                         }
                     ],
                     cameras: ['DBcameras',

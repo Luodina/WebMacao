@@ -3,8 +3,14 @@ angular.module('basic')
     .controller('SettingCtrl', ['$rootScope', '$scope', '$http', 'tasks', 'STtaskInfo', '$q', 'cameras', '$state',
         ($rootScope, $scope, $http, tasks, STtaskInfo, $q, cameras, $state) => {
             let taskIds = [];
+            $scope.serverStatus = 'Active';
             if (tasks) {
-                taskIds = tasks.taskIds;
+                if (tasks.resolveError) {
+                    $scope.serverStatus = tasks.resolveError.statusText;
+                } else {
+                    taskIds = tasks.taskIds;
+                    $scope.serverStatus = 'Active';
+                }
             }
             let promises = [];
             $scope.tab = 0;
@@ -111,7 +117,6 @@ angular.module('basic')
                         })
                         .catch(err => { console.log('Error occured'); });
                 }
-
             }
         }
     ]);

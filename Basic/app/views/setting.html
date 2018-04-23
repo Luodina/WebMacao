@@ -32,7 +32,10 @@
                 <div style="margin:10px">
                     <div style="border-radius:5px;background-color:rgb(236, 233, 233);;margin-top:10px;min-height:150px;padding-top: 10px;padding-left: 10px;">
                         <h4>Sense Server</h4>
-                        <h5>Status</h5>
+                        <h5>Status
+                            <span ng-show="serverStatus=='Active'" style="color:green;">{{serverStatus}} </span>
+                            <span ng-show="!(serverStatus=='Active')" style="color:red">{{serverStatus}} </span>
+                        </h5>
                     </div>
                     <div style="border-radius:5px;background-color:rgb(236, 233, 233);;margin-top:15px;min-height:350px;padding-top: 10px;padding-left: 10px;padding-right: 10px;">
                         <h4>Cameras</h4>
