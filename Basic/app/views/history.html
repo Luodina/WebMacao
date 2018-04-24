@@ -1,82 +1,113 @@
 <div class="temp" style="margin:15px">
     <div class="row">
-        <div class="col-lg-7 col-md-7 col-sm-7">
+        <div class="col-lg-5 col-md-5 col-sm-5">
             <div class="row">
                 <div class="col-lg-2 col-md-3 col-sm-3">
                     Date
                 </div>
                 <div class="col-lg-10 col-md-9 col-sm-9" style="padding-left: 0px;padding-right: 10px;">
                     <div class="col-lg-6 col-md-6 col-sm-6">
-                        <p class="input-group">
-                            <input type="text" class="form-control" datetime-picker="yyyy-MM-dd HH:mm" required timepicker-options="{showMeridian: false}" button-bar="false" ng-model="period.start" is-open="period.start" datepicker-append-to-body="true">
+                        <p class="input-group" style="min-width: 145px;">
+                            <input type="text" class="form-control" datetime-picker="yyyy-MM-dd HH:mm" required timepicker-options="{showMeridian: false}" button-bar="false" ng-model="period.start" is-open="period.t1" datepicker-append-to-body="true">
                             <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" ng-click="period.start = true;" style="margin-top: 0px;">
+                                    <button type="button" class="btn btn-default" ng-click="period.t1 = true;" style="margin-top: 0px;">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </button>
                                 </span>
                         </p>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6" style="padding-left: 10px;padding-right: 10px;">
-                        <p class="input-group">
-                            <input type="text" class="form-control" datetime-picker="yyyy-MM-dd HH:mm" required timepicker-options="{showMeridian: false}" button-bar="false" ng-model="period.start" is-open="period.finish" datepicker-append-to-body="true">
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="">
+                        <p class="input-group" style="min-width: 145px;">
+                            <input type="text" class="form-control" datetime-picker="yyyy-MM-dd HH:mm" required timepicker-options="{showMeridian: false}" button-bar="false" ng-model="period.finish" is-open="period.t2" datepicker-append-to-body="true">
                             <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="period.finish = true;" style="margin-top: 0px;">
-                                            <i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span>
+                                <button type="button" class="btn btn-default" ng-click="period.t2 = true;" style="margin-top: 0px;">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
                         </p>
                     </div>
                 </div>
             </div>
             <div class="row" style="margin-top: 15px;">
-                <div class="col-lg-2 col-md-2 col-sm-2">
+                <div class="col-lg-2 col-md-3 col-sm-3">
                     Location
                 </div>
-                <div class="col-lg-10 col-md-10 col-sm-10">
+                <div class="col-lg-10 col-md-9 col-sm-9">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="border-radius:4px">
+                        <input type="text" ng-model="location" class="form-control" placeholder="Location" aria-describedby="basic-addon1" style="min-width: 145px;border-radius:4px;">
                     </div>
                 </div>
             </div>
-            <div class="row" style="margin-top: 15px; padding-left: 15px;">
-                <button type="button" class="btn btn-primary" style="margin-top: 0px;">Filter</button>
-                <button type="button" class="btn btn-primary" style="margin-top: 0px;">Reset</button>
+            <div class="row" style="margin-top: 25px; padding-left: 15px;">
+                <button type="button" class="btn btn-primary" style="margin-top: 0px;" ng-click="filter()">Filter</button>
+                <button type="button" class="btn btn-primary" style="margin-top: 0px;" ng-click="reset()">Reset</button>
             </div>
         </div>
-        <div class="col-lg-5 col-md-5 col-sm-5">
+        <div class="col-lg-4 col-md-4 col-sm-4">
             <div class="row">
-                <div class="form-group">
-                    <div class="col-lg-3 col-md-3 col-sm-3">
-                        Camera
-                    </div>
-                    <div class="col-lg-9 col-md-9 col-sm-9">
-                        <select class="form-control" id="sel1">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                              </select>
+                <div class="col-lg-2 col-md-3 col-sm-3">
+                    Camera
+                </div>
+                <div class="col-lg-10 col-md-9 col-sm-9">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                              Camera {{selected}}
+                            <span class="caret"></span>
+                            </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li ng-repeat="camera in cameras">
+                                <a ng-click="setSelected(camera.name)">Camera {{camera.name}}</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a ng-click="setSelected('')">All</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
             <div class="row" style="margin-top: 15px;">
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    Similarity
+                <div class="col-lg-2 col-md-3 col-sm-3">
+                    Name
+                </div>
+                <div class="col-lg-10 col-md-9 col-sm-9">
+                    <div class="input-group">
+                        <input type="text" style="min-width: 200px;border-radius:4px;" ng-model="name" class="form-control" placeholder="Name" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-3">
+
+                </div>
+                <div class="col-lg-10 col-md-9 col-sm-9">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"  ng-model="inclUnregistr"> Include Unregistered People
+                        </label>
+                    </div>
                 </div>
 
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3">
+            <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="">All</label>
-                    </div>
+                    Similarity
                 </div>
-                <div class="col-lg-5 col-md-5 col-sm-5">
+                <div class="col-lg-8 col-md-8 col-sm-8">
                     <div class="checkbox">
-                        <label><input type="checkbox" value="">High</label>
+                        <label>
+                                <input type="checkbox" ng-disabled="camera.status.high||camera.status.medium||camera.status.low"  ng-model="camera.status.all">All
+                            </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label><input type="checkbox" ng-disabled="camera.status.all" ng-model="camera.status.high">High</label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" value="">Medium</label>
+                        <label><input type="checkbox" ng-disabled="camera.status.all" ng-model="camera.status.medium">Medium</label>
                     </div>
-                    <div class="checkbox disabled">
-                        <label><input type="checkbox" value="" disabled>Low</label>
+                    <div class="checkbox">
+                        <label><input type="checkbox" ng-disabled="camera.status.all" ng-model="camera.status.low">Low</label>
                     </div>
                 </div>
             </div>
@@ -147,3 +178,17 @@
         </nav>
     </div>
 </div>
+
+<style>
+    .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+    }
+    
+    .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+    }
+</style>

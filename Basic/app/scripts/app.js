@@ -31,7 +31,8 @@ angular
         'angularFileUpload',
         'hc.marked',
         'smart-table',
-        'angular-md5'
+        'angular-md5',
+        'ipCookie'
     ])
     .constant('GLOBAL', {
         host_user: './api/user',
