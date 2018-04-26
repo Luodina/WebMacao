@@ -4,7 +4,7 @@ module.exports = {
         dist: 'app',
         port: 5555,
         db: 'mongodb://localhost/sensetimedb',
-        STserver: 'http://10.232.1.49:83'
+        STserver: 'http://10.232.1.49:80'
     },
     prod: {
         dist: 'app',

@@ -1,10 +1,23 @@
 'use strict';
-let express = require('express');
-let router = express.Router();
-let auth = require('../utils/auth');
+const express = require('express');
+const router = express.Router();
+const auth = require('../utils/auth');
+const path = require('path');
 const config = require('./../config');
-let env = config.env || 'dev';
+const env = config.env || 'dev';
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: function destination(req, destination, cb) {
+        cb(null, path.join(__dirname, '../../pics'));
+    },
 
+    filename: function filename(req, file, cb) {
+        cb(null, file.originalname);
+        //dataFileName = file.originalname;
+    }
+});
+
+const upload = multer({ storage: storage });
 router.get('/rtm', function(req, res) {
     let rtm = { id: '123456789', name: 'Kitty', age: '5', foto: 'https://sanrio-production-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTYvMDYvMTQvMjAvNDgvMzQvMTM3L2NocmFjdGVyX2hlbGxvX2tpdHR5LmpwZyJdXQ/chracter-hello-kitty.jpg?sha=f5e7c272d3fc6e78' };
     res.status(200).send({ rtm: rtm });
@@ -21,5 +34,8 @@ router.get('/fromdb', function(req, res) {
 
     ];
     res.status(200).send({ dbList: dbList });
-})
+});
+router.post('/upload', upload.single('file'), function(req, res) {
+    res.status(200).send({ fileName: req.file.originalname });
+});
 module.exports = router;
