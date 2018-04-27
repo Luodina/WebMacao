@@ -1,6 +1,6 @@
 'use strict';
 let mongoose = require('../mongoose');
-let Camera = require('../model/cameras');
+let Camera = require('../model/Camera');
 let express = require('express');
 let router = express.Router();
 
@@ -41,7 +41,7 @@ router.delete('/', function(req, res) {
         });
 });
 router.get('/', function(req, res) {
-    find('cameras', {}, function(err, docs) {
+    find('camera', {}, function(err, docs) {
         if (err) { res.status(403).send({ status: false, msg: err }); }
         res.status(200).send(docs);
     });

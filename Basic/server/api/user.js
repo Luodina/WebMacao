@@ -1,6 +1,6 @@
 'use strict';
 let mongoose = require('../mongoose');
-let User = require('../model/users');
+let User = require('../model/User');
 let express = require('express');
 let router = express.Router();
 let auth = require('../utils/auth');

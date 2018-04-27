@@ -19,7 +19,10 @@ angular.module('basic.resource', ['ngResource'])
     .factory('DBpeople', ['$resource', 'GLOBAL', function($resource, GLOBAL) {
         let DBcameras = $resource(GLOBAL.db + '/people/:name', { name: '@name' }, {
             create: { method: 'POST' },
-            del: { method: 'DELETE' },
+            del: {
+                method: 'POST',
+                url: GLOBAL.db + '/people/del'
+            },
             update: { method: 'PUT' }
         });
         return DBcameras;

@@ -112,7 +112,7 @@ app.use(bodyParser.urlencoded({
 
 // rest api
 app.use('/api/user', require('./api/user'));
-app.use('/api/db/people', require('./api/people'));
+app.use('/api/db/people', require('./api/regpeople'));
 app.use('/api/db/camera', require('./api/camera'));
 app.use('/api/people', require('./api/rtm'));
 

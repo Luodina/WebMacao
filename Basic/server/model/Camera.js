@@ -1,9 +1,7 @@
 "use strict"
 var mongoose = require('mongoose');
-var crypto = require('crypto');
-var jwt = require('jsonwebtoken');
 
-var Schema = new mongoose.Schema({
+var cameraSchema = new mongoose.Schema({
     name: {
         type: String,
         unique: true,
@@ -39,4 +37,4 @@ var Schema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('cameras', Schema);
+module.exports = mongoose.model('camera', cameraSchema);

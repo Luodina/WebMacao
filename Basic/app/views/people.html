@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3">
-                    <div>
+                    <!-- <div>
                         Last Captured Date
                     </div>
                     <div style="margin-top:10px;width:100%;">
@@ -41,15 +41,15 @@
                                       <button type="button" class="btn btn-default" ng-click="period.t1 = true;"><i class="glyphicon glyphicon-calendar"></i></button>
                                     </span>
                         </p>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3">
-                    <div>
+                    <!-- <div>
                         Last Captured Location
                     </div>
                     <div class="input-group" style="margin-top:10px;width:100%;">
                         <input type="text" ng-model="location" class="form-control" placeholder="Location" aria-describedby="basic-addon1" style="min-width: 145px;border-radius:4px;">
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <div>
@@ -66,51 +66,45 @@
                         <thead class="thead-light" style="background-color:#eaeaea">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Alternative Name</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
+                            <tr ng-repeat="person in people track by $index">
+                                <th scope="row">{{$index}}</th>
+                                <td>{{person.personname}}</td>
+                                <td>{{person.altname}}</td>
+                                <td>
+                                    <button style="width:70px;margin-left:10px;" type="button" class="btn btn-primary" ng-click="edit(person)">Edit</button>
+                                </td>
+                                <td>
+                                    <button style="width:70px;margin-left:10px;" type="button" class="btn btn-primary" ng-click="delete(person)">Delete</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination">
+            <div class="row ">
+                <div class="col-lg-12 col-md-12 col-sm-12 ">
+                    <nav aria-label="Page navigation ">
+                        <ul class="pagination ">
                             <li>
-                                <a href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
+                                <a href="# " aria-label="Previous ">
+                                    <span aria-hidden="true ">&laquo;</span>
                                 </a>
                             </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+                            <li><a href="# ">1</a></li>
+                            <li><a href="# ">2</a></li>
+                            <li><a href="# ">3</a></li>
+                            <li><a href="# ">4</a></li>
+                            <li><a href="# ">5</a></li>
                             <li>
-                                <a href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
+                                <a href="# " aria-label="Next ">
+                                    <span aria-hidden="true ">&raquo;</span>
                                 </a>
                             </li>
                         </ul>
@@ -120,86 +114,86 @@
             </div>
         </div>
 
-        <div ng-show='tab == 1' class="col-lg-10 col-md-10 col-sm-10" style="">
-            <div class="row" style="margin-bottom:10px;padding-left: 40px;">
+        <div ng-show='tab == 1' class="col-lg-10 col-md-10 col-sm-10 " style=" ">
+            <div class="row " style="margin-bottom:10px;padding-left: 40px; ">
                 <h3>Register a People</h3>
             </div>
-            <div class="row" style="margin-bottom:10px;">
-                <div class="col-lg-6 col-md-6 col-sm-6" style="min-width:140px;">
-                    <div class="row" style="padding-left: 40px;padding-right: 40px;margin-top:10px;">
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="row " style="margin-bottom:10px; ">
+                <div class="col-lg-6 col-md-6 col-sm-6 " style="min-width:140px; ">
+                    <div class="row " style="padding-left: 40px;padding-right: 40px;margin-top:10px; ">
+                        <div class="col-lg-4 col-md-4 col-sm-4 ">
                             Name
                         </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8" style="min-width:140px;">
-                            <input type="text" ng-model="person.personname" class="form-control" placeholder="Name" aria-describedby="basic-addon1" style="border-radius:4px;">
+                        <div class="col-lg-8 col-md-8 col-sm-8 " style="min-width:140px; ">
+                            <input type="text " ng-model="person.personname " class="form-control " placeholder="Name " aria-describedby="basic-addon1 " style="border-radius:4px; ">
                         </div>
                     </div>
-                    <div class="row" style="padding-left: 40px;padding-right: 40px;margin-top:10px;">
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="row " style="padding-left: 40px;padding-right: 40px;margin-top:10px; ">
+                        <div class="col-lg-4 col-md-4 col-sm-4 ">
                             Alternative Name
                         </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8" style="min-width:140px;">
-                            <input type="text" ng-model="person.altname" class="form-control" placeholder="e.g.Chinese Name" aria-describedby="basic-addon1" style="border-radius:4px;">
+                        <div class="col-lg-8 col-md-8 col-sm-8 " style="min-width:140px; ">
+                            <input type="text " ng-model="person.altname " class="form-control " placeholder="e.g.Chinese Name " aria-describedby="basic-addon1 " style="border-radius:4px; ">
                         </div>
                     </div>
-                    <div class="row" style="padding-left: 40px;padding-right: 40px;margin-top:10px;">
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="row " style="padding-left: 40px;padding-right: 40px;margin-top:10px; ">
+                        <div class="col-lg-4 col-md-4 col-sm-4 ">
                             Sex
                         </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8" style="min-width:140px;">
-                            <input type="text" ng-model="person.sex" class="form-control" placeholder="M/F/Unknown" aria-describedby="basic-addon1" style="border-radius:4px;">
+                        <div class="col-lg-8 col-md-8 col-sm-8 " style="min-width:140px; ">
+                            <input type="text " ng-model="person.sex " class="form-control " placeholder="M/F/Unknown " aria-describedby="basic-addon1 " style="border-radius:4px; ">
                         </div>
                     </div>
-                    <div class="row" style="padding-left: 40px;padding-right: 40px;margin-top:10px;">
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="row " style="padding-left: 40px;padding-right: 40px;margin-top:10px; ">
+                        <div class="col-lg-4 col-md-4 col-sm-4 ">
                             Nationality
                         </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8" style="min-width:140px;">
-                            <input type="text" ng-model="person.nationality" class="form-control" placeholder="Nationality" aria-describedby="basic-addon1" style="border-radius:4px;">
+                        <div class="col-lg-8 col-md-8 col-sm-8 " style="min-width:140px; ">
+                            <input type="text " ng-model="person.nationality " class="form-control " placeholder="Nationality " aria-describedby="basic-addon1 " style="border-radius:4px; ">
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3 ">
+                    <div class="row ">
                         <div>
-                            <img src="https://sanrio-production-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTYvMDYvMTQvMjAvNDgvMzQvMTM3L2NocmFjdGVyX2hlbGxvX2tpdHR5LmpwZyJdXQ/chracter-hello-kitty.jpg?sha=f5e7c272d3fc6e78" width="150px" height="150px">
+                            <img width="150px " height="150px " src={{STImage}}>
                         </div>
-                        <!-- <div class="dataFileImport">
-                            <div class="file_border">
-                                <input type="file" ngf-select nv-file-select="" uploader="uploader" ng-model="file" class="chooseFile" ng-click="clearItems()" />
-                                <div ng-repeat="item in uploader.queue" style="line-height:30px;padding-left:4px;">
+                        <!-- <div class="dataFileImport ">
+                            <div class="file_border ">
+                                <input type="file " ngf-select nv-file-select=" " uploader="uploader " ng-model="file " class="chooseFile " ng-click="clearItems() " />
+                                <div ng-repeat="item in uploader.queue " style="line-height:30px;padding-left:4px; ">
                                     <p>{{item.file.name}}</p>
                                 </div>
                             </div>
-                            <button class="fileUpload" id='fileUpload' ng-click="upload()" ng-disabled="!file">{{'web_common_data_explore_007' | translate}}</button>
+                            <button class="fileUpload " id='fileUpload' ng-click="upload() " ng-disabled="!file ">{{'web_common_data_explore_007' | translate}}</button>
                         </div> -->
                         <div>
                             <input ngf-select type="file" ng-model="file">
                             <!-- <div>
-                                <button id='fileUpload' type="button" ng-click="upload()">{{'web_common_010' | translate}}</button>
+                                <button id='fileUpload' type="button " ng-click="upload() ">{{'web_common_010' | translate}}</button>
                             </div> -->
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    <div class="row"></div>
+                <div class="col-lg-3 col-md-3 col-sm-3 ">
+                    <div class="row "></div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12" style="min-width:140px;">
-                    <div class="row" style="padding-left: 40px;padding-right: 40px;">
-                        <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="row ">
+                <div class="col-lg-12 col-md-12 col-sm-12 " style="min-width:140px; ">
+                    <div class="row " style="padding-left: 40px;padding-right: 40px; ">
+                        <div class="col-lg-2 col-md-2 col-sm-2 ">
                             Remarks
                         </div>
-                        <div class="col-lg-10 col-md-10 col-sm-10" style="min-width:400px;padding-left: 0px;">
-                            <textarea class="form-control" ng-model="person.remarks" rows="2" placeholder="Remarks"></textarea>
+                        <div class="col-lg-10 col-md-10 col-sm-10 " style="min-width:400px;padding-left: 0px; ">
+                            <textarea class="form-control " ng-model="person.remarks " rows="2 " placeholder="Remarks "></textarea>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row" style="margin-top:20px;">
-                <button style="width:70px;margin-left:10px;" type="button" class="btn btn-primary" ui-sref="people" ui-sref-opts="{reload: true, notify: true} ">Cancel</button>
-                <button style="width:70px" type="button" ng-click="save()" class="btn btn-primary">Save</button>
+            <div class="row " style="margin-top:20px; ">
+                <button style="width:70px;margin-left:10px; " type="button " class="btn btn-primary " ui-sref="people " ui-sref-opts="{reload: true, notify: true} ">Cancel</button>
+                <button style="width:70px " type="button " ng-click="save() " class="btn btn-primary" ui-sref-opts="{reload: true, notify: true} ">Save</button>
             </div>
         </div>
     </div>

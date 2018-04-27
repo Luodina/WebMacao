@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var SchemaTypes = mongoose.Schema.Types;
 
-var CollectResultSchema = new Schema({
+var resultRTModelSchema = new Schema({
     taskid: {
         type: String
     },
@@ -62,4 +62,4 @@ var CollectResultSchema = new Schema({
 
 });
 
-module.exports = mongoose.model('rtmResults', CollectResultSchema);
+module.exports = mongoose.model('resultrtmodel', resultRTModelSchema);

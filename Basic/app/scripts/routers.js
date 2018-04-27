@@ -18,14 +18,15 @@ angular.module('basic.routers', ['ui.router'])
                 name: 'people',
                 url: '/people',
                 templateUrl: 'views/people.html',
-                controller: 'PeopleCtrl',
-                resolve: {
+                controller: 'PeopleCtrl'
+                    // ,
+                    // resolve: {
                     // people: ['DBpeople',
                     //     function(DBpeople) {
                     //         return DBpeople.query({}).$promise;
                     //     }
                     // ]
-                }
+                    // }
             },
             {
                 name: 'history',

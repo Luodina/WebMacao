@@ -1,9 +1,7 @@
 'use strict';
 let mongoose = require('mongoose');
-let crypto = require('crypto');
-let jwt = require('jsonwebtoken');
 
-let regPeople = new mongoose.Schema({
+let regPeopleScheme = new mongoose.Schema({
     personname: {
         type: String,
         unique: true,
@@ -41,8 +39,16 @@ let regPeople = new mongoose.Schema({
         type: String,
         required: true
     },
+    create_dt: {
+        type: Date,
+        required: true
+    },
+    update_dt: {
+        type: Date,
+        required: false
+    },
     hash: String,
     salt: String
 });
 
-module.exports = mongoose.model('regPeople', regPeople);
+module.exports = mongoose.model('regpeople', regPeopleScheme);
