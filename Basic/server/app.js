@@ -112,8 +112,9 @@ app.use(bodyParser.urlencoded({
 
 // rest api
 app.use('/api/user', require('./api/user'));
-app.use('/api/people', require('./api/people'));
+app.use('/api/db/people', require('./api/people'));
 app.use('/api/db/camera', require('./api/camera'));
+app.use('/api/people', require('./api/rtm'));
 
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '../', config[env].dist, '/404.html')); // load the single view file (angular will handle the page changes on the front-end)

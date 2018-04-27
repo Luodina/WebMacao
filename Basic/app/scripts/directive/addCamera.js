@@ -1,7 +1,7 @@
 'use strict';
 angular.module('basic')
-    .controller('AddCameraCtrl', ['$rootScope', '$scope', '$http', '$location', 'STtasksCreate', 'DBcameras', 'STtasksDel',
-        function($rootScope, $scope, $http, $location, STtasksCreate, DBcameras, STtasksDel) {
+    .controller('AddCameraCtrl', ['GLOBAL', '$rootScope', '$scope', '$http', '$location', 'STtasksCreate', 'DBcameras', 'STtasksDel',
+        function(GLOBAL, $rootScope, $scope, $http, $location, STtasksCreate, DBcameras, STtasksDel) {
             let mode = 'add';
             $scope.$on('camera', (el, data) => {
                 if (data.camera) {
@@ -29,16 +29,16 @@ angular.module('basic')
                                 "Index": 0,
                                 "FilterNoImg": 1,
                                 "ProtocolType": 10,
-                                "URL": "10.254.0.116:3000"
+                                "URL": GLOBAL.STresURL,
                             }, {
                                 "Index": 1,
                                 "FilterNoImg": 1,
                                 "ProtocolType": 10,
-                                "URL": "10.254.0.116:3000"
+                                "URL": GLOBAL.STresURL
                             }],
                             "Private": {
                                 "targets": [
-                                    { "dbId": "TEST01", "score": 0.5 }
+                                    { "dbId": GLOBAL.STDBname, "score": GLOBAL.STDBscore }
                                 ]
                             }
                         }

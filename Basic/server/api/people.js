@@ -1,41 +1,62 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-const auth = require('../utils/auth');
-const path = require('path');
-const config = require('./../config');
-const env = config.env || 'dev';
-const multer = require('multer');
-const storage = multer.diskStorage({
-    destination: function destination(req, destination, cb) {
-        cb(null, path.join(__dirname, '../../pics'));
-    },
+let regPeople = require('../model/regPeople');
+// const auth = require('../utils/auth');
+// const path = require('path');
+// const config = require('./../config');
+// const env = config.env || 'dev';
+// const fs = require('fs');
+// const multer = require('multer');
+// const storage = multer.diskStorage({
+//     destination: function destination(req, destination, cb) {
+//         cb(null, path.join(__dirname, '../../pics'));
+//     },
 
-    filename: function filename(req, file, cb) {
-        cb(null, file.originalname);
-        //dataFileName = file.originalname;
-    }
-});
+//     filename: function filename(req, file, cb) {
+//         cb(null, file.originalname);
+//         //dataFileName = file.originalname;
+//     }
+// });
 
-const upload = multer({ storage: storage });
-router.get('/rtm', function(req, res) {
-    let rtm = { id: '123456789', name: 'Kitty', age: '5', foto: 'https://sanrio-production-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTYvMDYvMTQvMjAvNDgvMzQvMTM3L2NocmFjdGVyX2hlbGxvX2tpdHR5LmpwZyJdXQ/chracter-hello-kitty.jpg?sha=f5e7c272d3fc6e78' };
-    res.status(200).send({ rtm: rtm });
-})
-router.get('/fromdb', function(req, res) {
-    let dbList = [
-        { name: 'Tom', age: '5', foto: 'https://cfvod.kaltura.com/p/1836881/sp/183688100/thumbnail/entry_id/0_gwa3xpo2/version/100012/width/133/height/133/type/3/bgcolor/000000/width/90/height/90/type/3/bgcolor/000000' },
-        { name: 'Jerry', age: '2', foto: 'https://cfvod.kaltura.com/p/1836881/sp/183688100/thumbnail/entry_id/0_gwa3xpo2/version/100012/width/133/height/133/type/3/bgcolor/000000/width/90/height/90/type/3/bgcolor/000000' },
-        { name: 'Panda', age: '2', foto: 'https://cfvod.kaltura.com/p/1836881/sp/183688100/thumbnail/entry_id/0_gwa3xpo2/version/100012/width/133/height/133/type/3/bgcolor/000000/width/90/height/90/type/3/bgcolor/000000' },
-        { name: 'Grizz', age: '5', foto: 'https://cfvod.kaltura.com/p/1836881/sp/183688100/thumbnail/entry_id/0_j30f8x9p/version/100012/width/133/height/133/type/3/bgcolor/000000/width/90/height/90/type/3/bgcolor/000000' },
-        { name: 'Jerry', age: '2', foto: 'https://cfvod.kaltura.com/p/1836881/sp/183688100/thumbnail/entry_id/0_gwa3xpo2/version/100012/width/133/height/133/type/3/bgcolor/000000/width/90/height/90/type/3/bgcolor/000000' },
-        { name: 'Panda', age: '2', foto: 'https://cfvod.kaltura.com/p/1836881/sp/183688100/thumbnail/entry_id/0_gwa3xpo2/version/100012/width/133/height/133/type/3/bgcolor/000000/width/90/height/90/type/3/bgcolor/000000' },
-        { name: 'Grizz', age: '5', foto: 'https://cfvod.kaltura.com/p/1836881/sp/183688100/thumbnail/entry_id/0_j30f8x9p/version/100012/width/133/height/133/type/3/bgcolor/000000/width/90/height/90/type/3/bgcolor/000000' }
+// const upload = multer({ storage: storage });
+// function readFiles(dirname, onFileContent, onError) {
+//     fs.readdir(dirname, function(err, filenames) {
+//         if (err) {
+//             onError(err);
+//             return;
+//         }
+//         filenames.forEach(function(filename) {
+//             fs.readFile(dirname + filename, 'utf-8', function(err, content) {
+//                 if (err) {
+//                     onError(err);
+//                     return;
+//                 }
+//                 onFileContent(filename, content);
+//             });
+//         });
+//     });
+// };
 
-    ];
-    res.status(200).send({ dbList: dbList });
+router.post('/', function(req, res) {
+    let regPerson = req.body.data;
+    console.log('regPerson', regPerson)
+    let newRegPerson = new regPeople(regPerson);
+    newRegPerson.save(function(err) {
+        if (err) { res.status(403).send({ status: false, msg: err }); }
+        res.status(200).send({ status: true });
+    })
 });
-router.post('/upload', upload.single('file'), function(req, res) {
-    res.status(200).send({ fileName: req.file.originalname });
-});
+// router.post('/upload', upload.single('file'), function(req, res) {
+//     let imgs = [];
+//     let filePath = path.join(__dirname, '../../pics/')
+//     let filename = req.file.originalname;
+
+//     readFiles(filePath, function(filename, content) {
+//         imgs.push({ imageDatas: content });
+//         res.status(200).send({ fileName: req.file.originalname, imgs: imgs });
+//     }, function(err) {
+//         throw err;
+//     });
+// });
 module.exports = router;

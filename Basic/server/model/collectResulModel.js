@@ -7,7 +7,7 @@ var CollectResultSchema = new Schema({
     taskid: {
         type: String
     },
-    imageid: {
+    imageid: { // if null unregistered
         type: String
     },
     imageurl: {

@@ -62,4 +62,4 @@ var CollectResultSchema = new Schema({
 
 });
 
-module.exports = mongoose.model('CollectResults', CollectResultSchema);
+module.exports = mongoose.model('rtmResults', CollectResultSchema);

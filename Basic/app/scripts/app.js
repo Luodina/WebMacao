@@ -38,7 +38,10 @@ angular
         host_user: './api/user',
         host_people: './api/people',
         STserver: './api/st',
-        db: './api/db'
+        db: './api/db',
+        STDBname: 'Web_test',
+        STresURL: '10.254.0.116:3000',
+        STDBscore: '0.5'
     })
     .config(['$translateProvider', '$windowProvider', function($translateProvider, $windowProvider) {
         let window = $windowProvider.$get();

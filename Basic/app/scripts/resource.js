@@ -16,6 +16,14 @@ angular.module('basic.resource', ['ngResource'])
         });
         return DBcameras;
     }])
+    .factory('DBpeople', ['$resource', 'GLOBAL', function($resource, GLOBAL) {
+        let DBcameras = $resource(GLOBAL.db + '/people/:name', { name: '@name' }, {
+            create: { method: 'POST' },
+            del: { method: 'DELETE' },
+            update: { method: 'PUT' }
+        });
+        return DBcameras;
+    }])
     .factory('STtasks', ['$resource', 'GLOBAL', function($resource, GLOBAL) {
         let STtasks = $resource('/api/st/Task/QueryResource?ProjectID=1000', {}, {});
         return STtasks;
@@ -37,4 +45,10 @@ angular.module('basic.resource', ['ngResource'])
             del: { method: 'POST' }
         });
         return STtasksDel;
+    }])
+    .factory('STimageUpload', ['$resource', 'GLOBAL', function($resource, GLOBAL) {
+        let STtasksCreate = $resource('/api/st/verify/face/synAdd', {}, {
+            create: { method: 'POST' }
+        });
+        return STtasksCreate;
     }]);

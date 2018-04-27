@@ -3,60 +3,90 @@ newFunction();
 function newFunction() {
     'use strict';
     angular.module('basic')
-        .controller('PeopleCtrl', ['$rootScope', '$scope', '$location', 'Upload', 'Notification', '$timeout', 'FileUploader', '$filter',
-            ($rootScope, $scope, $location, Upload, Notification, $timeout, FileUploader, $filter) => {
+        .controller('PeopleCtrl', ['GLOBAL', 'DBpeople', '$http', '$rootScope', '$scope', '$location', 'Upload', 'Notification', '$timeout', 'FileUploader', '$filter',
+            (GLOBAL, DBpeople, $http, $rootScope, $scope, $location, Upload, Notification, $timeout, FileUploader, $filter) => {
                 $scope.tab = '0';
-                $scope.search = function() {
+                $scope.search = () => {
                     $scope.tab = '0';
                 };
-                $scope.add = function(num) {
+                $scope.add = (num) => {
                     $scope.tab = '1';
                 };
-                // let uploader = $rootScope.uploader = new FileUploader({
-                //     url: 'upload.php',
-                //     queueLimit: 1,
-                //     removeAfterUpload: true
-                // });
-                // $rootScope.clearItems = () => {
-                //     uploader.clearQueue();
-                // };
+                $scope.person = {};
 
                 function getFileExtension(filename) {
-                    return filename
+                    if (filename) return filename
                         .split('.') // Split the string on every period
                         .slice(-1)[0]; // Get the last item from the split
-                }
-
-                function getFileName(filename) {
-                    return filename.replace('.' + getFileExtension(filename), ''); // Get the first item from the split
-                }
-                $scope.upload = () => {
-
-                    if ($scope.file) {
-                        console.log($scope.file);
-                        document.getElementById('fileUpload').style.background = '#f4f4f4';
-                        document.getElementById('fileUpload').style.color = '#999';
-                        document.getElementById('fileUpload').style.border = 'solid 1px #999';
-                        let fileExt = getFileExtension($scope.file.name);
-                        if (fileExt === 'png' || fileExt === 'jpeg' || fileExt === 'jpg') {
-
-                            $scope.uploadFile($scope.file);
-                        } else {
-                            Notification.error($filter('translate')('Choose image file!'));
-                        }
+                };
+                let isInputDataValid = () => {
+                    if (!($scope.person.personname !== undefined && $scope.person.personname !== null)) {
+                        Notification.error($filter('translate')('Field name can not be empty!'));
+                        return false;
+                    };
+                    if (!($scope.person.altname !== undefined && $scope.person.altname !== null)) {
+                        Notification.error($filter('translate')('Field alternative name can not be empty!'));
+                        return false;
+                    };
+                    if (!['f', 'm', '男', '女'].includes($scope.person.sex)) {
+                        Notification.error($filter('translate')("Input value should be: 'f', 'm', '男', '女'!"));
+                        return false;
+                    };
+                    if (!($scope.person.nationality !== undefined && $scope.person.nationality !== null)) {
+                        Notification.error($filter('translate')('Field nationality can not be empty!'));
+                        return false;
+                    };
+                    if (!($scope.person.remarks !== undefined && $scope.person.remarks !== null)) {
+                        Notification.error($filter('translate')('Field remarks can not be empty!!'));
+                        return false;
+                    };
+                    let fileExt = '';
+                    if ($scope.file) fileExt = getFileExtension($scope.file.name);
+                    if (!(fileExt === 'png' || fileExt === 'jpeg' || fileExt === 'jpg')) {
+                        Notification.error($filter('translate')('Choose image file: png or jpegor jpg!'));
+                        return false;
+                    }
+                    return true;
+                };
+                $scope.save = () => {
+                    if (isInputDataValid()) {
+                        $scope.uploadFile();
                     }
                 };
-                $scope.uploadFile = file => {
-                    console.log('uploadFile!');
-                    Upload.upload({ url: '/api/people/upload', data: { file: file } })
+                $scope.uploadFile = () => {
+                    let fd = new FormData();
+                    fd.append('imageDatas', $scope.file);
+                    let uploadUrl = '/api/st/verify/face/synAdd?dbName=' + GLOBAL.STDBname;
+                    let $promise = $http.post(uploadUrl, fd, {
+                        transformRequest: angular.identity,
+                        headers: { 'Content-Type': undefined }
+                    });
+                    $promise
                         .then(data => {
-                            console.log(data);
-                            $timeout(() => {
-                                Notification.success($filter('translate')('web_common_explore_013'));
-                            }, 1000);
-                        }).catch(err => {
-                            Notification.success($filter('translate')(err));
-                        });
+                            //console.log('upload data', data);
+                            if (data.data && data.data.fail && data.data.success.length !== 0) {
+                                //console.log('data.success', data.data.success);
+                                return data.data.success;
+                            } else {
+                                console.log('data.fail', data.data.fail);
+                                //return $q.reject(response); // convert into a rejection
+                            }
+                        })
+                        .then(res => {
+                            if (res) {
+                                let dbData = Object.assign($scope.person, res[0]);
+                                DBpeople.create({ data: dbData }).$promise
+                                    .then(response => {
+                                        $scope.tab = '0';
+                                        return response;
+                                    })
+                                    .catch(err => { console.log('err', err); });
+                            }
+                        })
+                        .then(res => {
+                            console.log('res', res);
+                        })
+                        .catch(err => { console.log('err in xxx', err); });
                 };
             }
         ]);
