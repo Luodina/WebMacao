@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-let RtmResults = require('../model/CollectResultRTModel');
+let RtmResults = require('../model/ResultRTModel');
 
 router.get('/rtm', function(req, res) {
     let rtm = { id: '123456789', name: 'Kitty', age: '5', foto: 'https://sanrio-production-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTYvMDYvMTQvMjAvNDgvMzQvMTM3L2NocmFjdGVyX2hlbGxvX2tpdHR5LmpwZyJdXQ/chracter-hello-kitty.jpg?sha=f5e7c272d3fc6e78' };

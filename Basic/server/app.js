@@ -6,9 +6,16 @@ import path from 'path';
 import favicon from 'serve-favicon';
 import proxy from 'http-proxy-middleware';
 import cookieParser from 'cookie-parser';
-
+import http from 'http';
+import iosocket from 'socket.io';
 let app = express();
 let env = config.env || 'dev';
+
+let server = http.createServer(app);
+let io = iosocket.listen(server);
+// Socket.io Communication
+
+io.sockets.on('connection', require('./api/socket'));
 //console.log('app', app)
 // var jwt = require('express-jwt');
 // var auth = jwt({
@@ -31,31 +38,6 @@ app.use('/api/st', proxy({
         '^/api/st/': '/'
     },
     ws: true,
-    onProxyReq: function onProxyReq(proxyReq, req, res) {
-        // console.log('proxy', proxyReq.context, proxyReq.opts)
-        //     // Log outbound request to remote target
-        // if (req.method === "POST") {
-        //     console.log('--> req.body ', req.body, '-->  ', proxyReq.host, proxyReq.path, '->', proxyReq.host + proxyReq.path);
-        //     console.log('--> req.headers');
-        //     console.log('--> config[env].STserver ', config[env].STserver)
-        //     var options = {
-        //         url: config[env].STserver + proxyReq.path,
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         json: req.body
-        //     };
-        //     console.log('--> options', options);
-        //     request(options, function(err, res, body) {
-        //         if (res && (res.statusCode === 200 || res.statusCode === 201)) {
-        //             console.log(body);
-        //             res.status(200).send({ body: body });
-        //         }
-        //     });
-        // }
-        // console.log('--> res', res)
-    },
     onError: function onError(err, req, res) {
         console.error(err);
         res.status(500);
@@ -116,12 +98,15 @@ app.use('/api/db/people', require('./api/regpeople'));
 app.use('/api/db/camera', require('./api/camera'));
 app.use('/api/people', require('./api/rtm'));
 
+
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '../', config[env].dist, '/404.html')); // load the single view file (angular will handle the page changes on the front-end)
 });
 
-app.listen(config[env].port, function() {
+// app.listen(config[env].port, function() {
+//     console.log('App listening on port ' + config[env].port + '!');
+// });
+server.listen(config[env].port, function() {
     console.log('App listening on port ' + config[env].port + '!');
-});
-
+})
 module.exports = app;

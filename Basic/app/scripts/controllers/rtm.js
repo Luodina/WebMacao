@@ -1,7 +1,7 @@
 'use strict';
 angular.module('basic')
-    .controller('RtmCtrl', ['$rootScope', '$scope', '$filter', 'fromdbFace', 'rtmFace',
-        ($rootScope, $scope, $filter, fromdbFace, rtmFace) => {
+    .controller('RtmCtrl', ['$rootScope', '$scope', '$filter', 'fromdbFace', 'rtmFace', 'socket',
+        ($rootScope, $scope, $filter, fromdbFace, rtmFace, socket) => {
             $scope.rtm = {};
             $scope.fromdb = [];
             let handleSuccess = function(data) {
@@ -22,6 +22,17 @@ angular.module('basic')
             });
             rtmFace.get({}, function(res) {
                 handleSuccessrtmFace(res);
+            });
+
+            // other clients will listen to new events here 
+            socket.on('connect', function(data) {
+                console.log(data);
+                // push the data.comments to your $scope.comments    
+            });
+
+            socket.on('send:name', function(data) {
+                $scope.name = data.name;
+                console.log("Here we are?", data.name);
             });
         }
     ]);

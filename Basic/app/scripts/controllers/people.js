@@ -2,7 +2,8 @@
 angular.module('basic')
     .controller('PeopleCtrl', ['GLOBAL', 'DBpeople', '$http', '$rootScope', '$scope', '$location', 'Upload', 'Notification', '$timeout', 'FileUploader', '$filter',
         (GLOBAL, DBpeople, $http, $rootScope, $scope, $location, Upload, Notification, $timeout, FileUploader, $filter) => {
-            $scope.STImage = "https://sanrio-production-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTYvMDYvMTQvMjAvNDgvMzQvMTM3L2NocmFjdGVyX2hlbGxvX2tpdHR5LmpwZyJdXQ/chracter-hello-kitty.jpg?sha=f5e7c272d3fc6e78";
+            $scope.STImage = "https://www.google.com.hk/imgres?imgurl=https%3A%2F%2Fstatic.licdn-ei.com%2Fscds%2Fcommon%2Fu%2Fimages%2Fthemes%2Fkaty%2Fghosts%2Fperson%2Fghost_person_200x200_v1.png&imgrefurl=https%3A%2F%2Fwww.linkedin.com%2Fpulse%2Flinkedin-changes-dimensions-company-page-logos-david-petherick&docid=5K98DnY8KaLGPM&tbnid=B2dDSDlRf7YDyM%3A&vet=10ahUKEwi0zPKr_N7aAhUD2LwKHVuEBCIQMwhoKCQwJA..i&w=200&h=200&bih=548&biw=1129&q=upload%20pic&ved=0ahUKEwi0zPKr_N7aAhUD2LwKHVuEBCIQMwhoKCQwJA&iact=mrc&uact=8";
+            //"https://sanrio-production-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTYvMDYvMTQvMjAvNDgvMzQvMTM3L2NocmFjdGVyX2hlbGxvX2tpdHR5LmpwZyJdXQ/chracter-hello-kitty.jpg?sha=f5e7c272d3fc6e78";
             $scope.search = () => {
                 $scope.tab = '0';
                 DBpeople.get({}).$promise
@@ -91,12 +92,13 @@ angular.module('basic')
                 }
                 return true;
             };
-            $scope.save = () => {
+            $scope.save = (mode) => {
                 if (isInputDataValid()) {
-                    $scope.uploadFile();
+                    $scope.uploadFile(mode);
                 }
             };
-            $scope.uploadFile = () => {
+            $scope.uploadFile = (mode) => {
+                console.log('mode', mode)
                 let fd = new FormData();
                 fd.append('imageDatas', $scope.file);
                 let uploadUrl = '/api/st/verify/face/synAdd?dbName=' + GLOBAL.STDBname;
@@ -104,37 +106,37 @@ angular.module('basic')
                     transformRequest: angular.identity,
                     headers: { 'Content-Type': undefined }
                 });
-                $promise
-                    .then(data => {
-                        //console.log('upload data', data);
-                        if (data.data && data.data.fail && data.data.success.length !== 0) {
-                            //console.log('data.success', data.data.success);
-                            return data.data.success;
-                        } else {
-                            console.log('data.fail', data.data.fail);
-                            Notification.error($filter('translate')(data.data.fail[0].errReason));
-                            //return $q.reject(response); // convert into a rejection
-                        }
-                    })
-                    .then(res => {
-                        if (res) {
-                            console.log('res', res);
-                            let dbData = Object.assign($scope.person, res[0]);
-                            let now = new Date();
-                            dbData.create_dt = now;
-                            DBpeople.create({ data: dbData }).$promise
-                                .then(response => {
-                                    //$scope.tab = '0';
-                                    $scope.search();
-                                    return response;
-                                })
-                                .catch(err => { console.log('err', err); });
-                        }
-                    })
-                    .then(res => {
-                        console.log('res', res);
-                    })
-                    .catch(err => { console.log('err in xxx', err); });
+                // $promise
+                //     .then(data => {
+                //         //console.log('upload data', data);
+                //         if (data.data && data.data.fail && data.data.success.length !== 0) {
+                //             //console.log('data.success', data.data.success);
+                //             return data.data.success;
+                //         } else {
+                //             console.log('data.fail', data.data.fail);
+                //             Notification.error($filter('translate')(data.data.fail[0].errReason));
+                //             //return $q.reject(response); // convert into a rejection
+                //         }
+                //     })
+                //     .then(res => {
+                //         if (res) {
+                //             console.log('res', res);
+                //             let dbData = Object.assign($scope.person, res[0]);
+                //             let now = new Date();
+                //             dbData.create_dt = now;
+                //             DBpeople.create({ data: dbData }).$promise
+                //                 .then(response => {
+                //                     //$scope.tab = '0';
+                //                     $scope.search();
+                //                     return response;
+                //                 })
+                //                 .catch(err => { console.log('err', err); });
+                //         }
+                //     })
+                //     .then(res => {
+                //         console.log('res', res);
+                //     })
+                //     .catch(err => { console.log('err in xxx', err); });
             };
         }
     ]);

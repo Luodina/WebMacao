@@ -32,7 +32,8 @@ angular
         'hc.marked',
         'smart-table',
         'angular-md5',
-        'ipCookie'
+        'ipCookie',
+        'btford.socket-io'
     ])
     .constant('GLOBAL', {
         host_user: './api/user',
