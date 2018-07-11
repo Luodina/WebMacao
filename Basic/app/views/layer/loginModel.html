@@ -1,36 +1,27 @@
 <div class="loginPage" id="login">
     <div class="content">
         <div class="contentModel">
-            <p class="conTitle" style="background: #ffffff;opacity: 0.95;">Sign In
-                <!--<span class="closeModelBtn" style="float: right;padding-right: 40px;" ng-click="cancel()"></span>-->
-            </p>
             <form class="main_form" name="frm">
-                <div class="conCont" style="background: #ffffff;opacity: 0.95;">
-                    <p class="error_tit" ng-if="error_name">The username or password is incorrect, please re-enter</p>
+                <div class="conCont">
+                    <div class="conTitle">
+                        <p>{{'web_login_signin'| translate }}</p>
+                    </div>
+                    <div class="conError">
+                        <p class="error_tit " ng-if="error_name">{{ msg | translate }} </p>
+                    </div>
                     <div class="conOne">
-                        <label>Login</label>
-                        <span class="textRgt" ng-if="frm.username.$dirty && frm.username.$invalid">
-                            Username can not be empty
-                        </span><br/>
-                        <input class="ipt" name="username" autocomplete="off" type="text" ng-model="usermessage.username" tabindex="1" required>
+                        <label>{{'web_login_login'| translate }}</label>
+                        <br/>
+                        <input class="ipt" placeholder="{{'web_login_valmsg_login'| translate }}" name="username" autocomplete="off" type="text" ng-model="usermessage.username" tabindex="1" required>
                     </div>
-                    <div class="conTwo">
-                        <label>Password</label>
-                        <span class="textRgt" ng-if="frm.password.$dirty && frm.password.$invalid">
-                            Password can not be blank
-                        </span><br/>
-                        <input class="ipt" name="password" type="password" autocomplete="off" ng-model="usermessage.password" tabindex="2" ng-keydown="enterLogin($event)" required>
+                    <div class="conOne">
+                        <label>{{'web_login_password'| translate }}</label>
+                        <br/>
+                        <input class="ipt" placeholder="{{'web_login_valmsg_pass'| translate }}" name="password" type="password" autocomplete="off" ng-model="usermessage.password" tabindex="2" ng-keydown="enterLogin($event)" required>
                     </div>
-
-                    <!-- <div class="login_forget" ng-class="{'active': isForget}" ng-click="isForget=!isForget">
-                        <i class="ta-cd no-me"></i>
-                        <p>Remember me</p>
-                    </div> -->
-
-                    <button class="btn" ng-click="frm.$valid && login()">Sign In</button>
-                    <!--<p class="footer">-->
-                    <!--<span class="titleText">没有账号?<span class="titleLogin" ng-click="register()">立即注册</span></span>-->
-                    <!--</p>-->
+                    <div>
+                        <button class="btn" ng-disabled="!(usermessage.username && usermessage.password)" ng-click="frm.$valid && login()">{{'web_login_signin'| translate }}</button>
+                    </div>
                 </div>
             </form>
         </div>

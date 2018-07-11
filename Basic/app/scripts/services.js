@@ -6,8 +6,8 @@ angular.module('basic.services', ['ui.bootstrap'])
                 backdrop: 'static',
                 templateUrl: 'views/layer/loginModel.html',
                 size: 'size',
-                controller: ['$rootScope', '$location', '$scope', '$filter', '$uibModalInstance', 'ipCookie', '$http', '$cookies', 'md5',
-                    ($rootScope, $location, $scope, $filter, $uibModalInstance, ipCookie, $http, $cookies, md5) => {
+                controller: ['$rootScope', '$location', '$scope', '$filter', '$uibModalInstance', 'ipCookie', '$http', '$cookies', 'md5', 'GLOBAL',
+                    ($rootScope, $location, $scope, $filter, $uibModalInstance, ipCookie, $http, $cookies, md5, GLOBAL) => {
                         $scope.expires = 7;
                         $scope.expirationUnit = 'days';
 
@@ -35,7 +35,7 @@ angular.module('basic.services', ['ui.bootstrap'])
                         };
                         $scope.deleteCookie = function() {
                             setMessage();
-                            console.log('removing cookie...');
+                            //console.log('removing cookie...');
                             ipCookie.remove('username');
                             ipCookie.remove('userpass');
                             if (ipCookie() === undefined) {
@@ -50,32 +50,38 @@ angular.module('basic.services', ['ui.bootstrap'])
                         $scope.isForget = false;
 
                         $scope.enterLogin = (e) => {
-                            e.keyCode === 13;
-                        };
-                        $scope.login = () => {
-                            console.log('LOGIN :', $scope.usermessage.password);
-                            if ($scope.usermessage.password !== undefined) {
-                                $scope.usermessage.password = md5.createHash($scope.usermessage.password);
-                                $rootScope.login($scope.usermessage.username, $scope.usermessage.password);
-                            }
-                        };
-                        $rootScope.login = (username, password) => {
-                            $http.post('/api/user/login/', { username, password }).success(function(user) {
-                                $rootScope.error_name = false;
-                                if (user.status) {
-                                    $cookies.put('username', username);
-                                    $cookies.put('aura_token', user.token);
-                                    $uibModalInstance.dismiss();
-                                    $rootScope.iflogin = true;
-                                    $rootScope.username = $cookies.get('username');
-                                    $location.path('/rtm');
-                                } else {
-                                    $rootScope.error_name = true;
-                                    console.log('LOGIN FAILED!please, use login name:ocai and pass:123456');
-                                }
-                            });
+                            e.keyCode = 13;
                         };
 
+                        function login(username, pass) {
+                            //console.log('login user');
+                            let password = md5.createHash(pass);
+                            $http.post('/api/user/login', { username, password })
+                                .success(user => {
+                                    //console.log('login user', user);
+                                    $rootScope.error_name = false;
+                                    if (user.status) {
+                                        $cookies.put('username', username);
+                                        $cookies.put('token', user.token);
+                                        $uibModalInstance.dismiss();
+                                        GLOBAL.role = user.role;
+                                        $rootScope.iflogin = true;
+                                        $rootScope.username = $cookies.get('username');
+                                        $location.path('/rtm');
+                                    } else {
+                                        $rootScope.error_name = true;
+                                        $scope.msg = user.msg;
+                                        //console.log('LOGIN FAILED!');
+                                    }
+                                });
+                        }
+                        $scope.login = () => {
+                            //console.log('LOGIN arrived!');
+                            if ($scope.usermessage.username !== undefined && $scope.usermessage.password !== undefined) {
+                                //console.log($scope.usermessage.username, $scope.usermessage.password);
+                                login($scope.usermessage.username, $scope.usermessage.password);
+                            }
+                        };
                         $scope.cancel = function() {
                             $uibModalInstance.dismiss();
                         };

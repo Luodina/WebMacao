@@ -1,78 +1,23 @@
 'use strict';
 angular.module('basic')
-    .controller('PeopleCtrl', ['GLOBAL', 'DBpeople', '$http', '$rootScope', '$scope', '$location', 'Upload', 'Notification', '$timeout', 'FileUploader', '$filter',
-        (GLOBAL, DBpeople, $http, $rootScope, $scope, $location, Upload, Notification, $timeout, FileUploader, $filter) => {
-            $scope.STImage = "https://www.google.com.hk/imgres?imgurl=https%3A%2F%2Fstatic.licdn-ei.com%2Fscds%2Fcommon%2Fu%2Fimages%2Fthemes%2Fkaty%2Fghosts%2Fperson%2Fghost_person_200x200_v1.png&imgrefurl=https%3A%2F%2Fwww.linkedin.com%2Fpulse%2Flinkedin-changes-dimensions-company-page-logos-david-petherick&docid=5K98DnY8KaLGPM&tbnid=B2dDSDlRf7YDyM%3A&vet=10ahUKEwi0zPKr_N7aAhUD2LwKHVuEBCIQMwhoKCQwJA..i&w=200&h=200&bih=548&biw=1129&q=upload%20pic&ved=0ahUKEwi0zPKr_N7aAhUD2LwKHVuEBCIQMwhoKCQwJA&iact=mrc&uact=8";
-            //"https://sanrio-production-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTYvMDYvMTQvMjAvNDgvMzQvMTM3L2NocmFjdGVyX2hlbGxvX2tpdHR5LmpwZyJdXQ/chracter-hello-kitty.jpg?sha=f5e7c272d3fc6e78";
-            $scope.search = () => {
-                $scope.tab = '0';
-                DBpeople.get({}).$promise
-                    .then(response => {
-                        console.log('response', response);
-                        $scope.people = response.docs;
-                    })
-                    .catch(err => { console.log('err', err); });
-            };
-            $scope.add = (num) => {
-                $scope.tab = '1';
-                // let uploadUrl = '/api/st/verify/face/gets?dbName=' + GLOBAL.STDBname + '&imageId=' + item.imageId;
-                // $http.post(uploadUrl).then(data => {
-                //     console.log('upload data', data);
-                //     $scope.search();
-                // }).catch(err => { console.log('err in delete', err); });
-            };
-            $scope.delete = (item) => {
-                let uploadUrl = '/api/st/verify/face/deletes?dbName=' + GLOBAL.STDBname + '&imageId=' + item.imageId;
-                let $promise = $http.post(uploadUrl);
-                $promise.then(data => {
-                        console.log('upload data', data);
-                        return true;
-                    }).then(data => {
-                        DBpeople.del({ id: item._id }).$promise
-                            .then(response => {
-                                console.log('response DBpeople', response);
-                                $scope.search();
-                                return response;
-                                //$scope.people = response.docs;
-                                // $timeout(() => {
-                                //     Notification.success($filter('translate')('Deleted successfully!'));
-                                //     //$scope.search();
-                                // }, 1000);
-                            })
-                            .catch(err => { console.log('err', err); });
-                    })
-                    .catch(err => { console.log('err in delete', err); });
-            };
-            $scope.edit = (item) => {
-                console.log('item', item);
-                $scope.person = item;
-                $scope.STImage = "http://10.232.1.49:80/verify/face/gets?imageId=" + item.imageId;
-                console.log('$scope.STImage', $scope.STImage);
-                $scope.tab = '1';
-                // let uploadUrl = '/api/st/verify/face/gets?dbName=' + GLOBAL.STDBname + '&imageId=' + item.imageId;
-                // $http.post(uploadUrl).then(data => {
-                //     console.log('upload data', data);
-                //     $scope.search();
-                // }).catch(err => { console.log('err in delete', err); });
-            };
-            $scope.person = {};
-            $scope.search();
-
-            function getFileExtension(filename) {
-                if (filename) return filename
-                    .split('.') // Split the string on every period
-                    .slice(-1)[0]; // Get the last item from the split
-            };
+    .controller('PeopleCtrl', ['GLOBAL', 'DBpeople', '$http', '$rootScope', '$scope', '$location', 'Upload', 'Notification', '$timeout', 'FileUploader', '$filter', '$q',
+        (GLOBAL, DBpeople, $http, $rootScope, $scope, $location, Upload, Notification, $timeout, FileUploader, $filter, $q) => {
+            //console.log("GLOBAL in ppl:", GLOBAL);
+            $scope.role = GLOBAL.role;
             let isInputDataValid = () => {
                 if (!($scope.person.personname !== undefined && $scope.person.personname !== null)) {
                     Notification.error($filter('translate')('Field name can not be empty!'));
+                    return false;
+                };
+                if ($scope.person.personname.length > 100) {
+                    Notification.error($filter('translate')('Only allow 100 Character for the Name!'));
                     return false;
                 };
                 if (!($scope.person.altname !== undefined && $scope.person.altname !== null)) {
                     Notification.error($filter('translate')('Field alternative name can not be empty!'));
                     return false;
                 };
-                if (!['f', 'm', '男', '女'].includes($scope.person.sex)) {
+                if (!['F', 'M', 'f', 'm', '男', '女'].includes($scope.person.sex)) {
                     Notification.error($filter('translate')("Input value should be: 'f', 'm', '男', '女'!"));
                     return false;
                 };
@@ -85,58 +30,202 @@ angular.module('basic')
                     return false;
                 };
                 let fileExt = '';
-                if ($scope.file) fileExt = getFileExtension($scope.file.name);
-                if (!(fileExt === 'png' || fileExt === 'jpeg' || fileExt === 'jpg')) {
-                    Notification.error($filter('translate')('Choose image file: png or jpegor jpg!'));
+                if ($scope.file && $scope.person.image) {
+                    fileExt = getFileExtension($scope.file.name);
+                    if (!(fileExt === 'png' || fileExt === 'jpeg' || fileExt === 'jpg' || fileExt === 'PNG' || fileExt === 'JPEG' || fileExt === 'JPG' || $scope.mode === 'edit')) {
+                        Notification.error($filter('translate')('Choose image file: png or jpeg or jpg!'));
+                        return false;
+                    }
+                } else {
+                    Notification.error($filter('translate')('Choose image file: png or jpeg or jpg!'));
                     return false;
                 }
                 return true;
             };
-            $scope.save = (mode) => {
+            $scope.curPage = 1;
+            $scope.search = curPage => {
+                $scope.curPage = curPage || 1;
+                $scope.tab = '0';
+                //console.log('here we are $scope.curPage', $scope.curPage);
+                DBpeople.get({ page: $scope.curPage }).$promise
+                    .then(response => {
+                        //console.log('response', response);
+                        if (response) {
+                            $scope.pages = response.pages;
+                            $scope.people = response.msg;
+                        }
+                    })
+                    .catch(err => { console.log('err in DBpeople.get', err); });
+            };
+            $scope.add = () => {
+                $scope.mode = 'new';
+                $scope.tab = '1';
+                $scope.person = {};
+                $scope.person.imageShow = "./../images/upload-md.png";
+            };
+            $scope.delete = item => {
+                let uploadUrl = '/api/st/verify/face/deletes?dbName=' + GLOBAL.CONFIG.STDBname + '&imageId=' + item.imageId;
+                let $promise = $http.post(uploadUrl);
+                $promise.then(data => {
+                        if (data && data.data && data.data.result === 'success') {
+                            return DBpeople.del({ id: item._id }).$promise;
+                        } else {
+                            return { status: 'error', msg: data.data.fail };
+                        }
+                    })
+                    .then(res => {
+                        if (res && res.status === 'error') {
+                            Notification.error('Error:!', res.msg);
+                        } else {
+                            $scope.person = {};
+                            $scope.search();
+                        }
+                    })
+                    .catch(err => {
+                        Notification.error('Error:!', err);
+                        //console.log('err in delete', err); 
+                    });
+            };
+            $scope.edit = item => {
+                //console.log('item', item.image);
+                $scope.mode = 'edit';
+                $scope.person = item;
+                $scope.oldPerson = angular.copy(item);
+                $scope.person.imageShow = item.image; //'data:image/jpeg;base64,' + item.image;
+                $scope.tab = '1';
+            };
+            $scope.save = () => {
                 if (isInputDataValid()) {
-                    $scope.uploadFile(mode);
+                    if ($scope.mode === 'new') { saveNew(); }
+                    if ($scope.mode === 'edit') { saveEdited(); }
                 }
             };
-            $scope.uploadFile = (mode) => {
-                console.log('mode', mode)
+            $scope.previewFile = () => {
+                if ($scope.file) {
+                    readBase64($scope.file).then(function(data) {
+                        $scope.person.imageShow = data;
+                        $scope.person.image = data;
+                        //console.log('data', data);
+                    });
+                }
+            };
+            $scope.person = {};
+            $scope.search($scope.curPage);
+
+            function readBase64(file) {
+                var reader = new FileReader();
+                var future = $q.defer();
+                reader.addEventListener("load", function() {
+                    future.resolve(reader.result);
+                }, false);
+                reader.readAsDataURL(file);
+                return future.promise;
+            };
+
+            function getFileExtension(filename) {
+                if (filename) return filename
+                    .split('.') // Split the string on every period
+                    .slice(-1)[0]; // Get the last item from the split
+            };
+
+            function updateSTImages() {
+                let url = '/api/st/verify/face/deletes?dbName=' + GLOBAL.CONFIG.STDBname + '&imageId=' + $scope.oldPerson.imageId;
+                let $promise = $http.post(url);
+                return $promise.then(delRes => {
+                        if (delRes && delRes.data && delRes.data.result === 'success') {
+                            let fd = new FormData();
+                            fd.append('imageDatas', $scope.file);
+                            url = '/api/st/verify/face/synAdd?dbName=' + GLOBAL.CONFIG.STDBname;
+                            return $http.post(url, fd, {
+                                transformRequest: angular.identity,
+                                headers: { 'Content-Type': undefined }
+                            });
+                        } else { return { status: 'error', msg: data.data.fail } }
+                    })
+                    .catch(err => {
+                        Notification.error('Error:!', err);
+                        //console.log('err in upload new pic to ST', err);
+                    });
+            }
+
+            function saveEdited() {
+                //let isSTNeedsUpdates = $scope.oldPerson.image !== $scope.person.image;
+                Promise.resolve()
+                    .then(() => {
+                        if ($scope.oldPerson.image !== $scope.person.image) {
+                            return updateSTImages();
+                        } else {
+                            return {};
+                        }
+                    })
+                    .then(data => {
+                        if (data && data.data && data.data.success) {
+                            let newVal = Object.assign({
+                                altname: $scope.person.altname,
+                                personname: $scope.person.personname,
+                                remarks: $scope.person.remarks,
+                                sex: $scope.person.sex,
+                                nationality: $scope.person.nationality,
+                                image: $scope.person.image
+                            }, data.data.success[0]);
+                            let now = new Date();
+                            newVal.update_dt = now;
+                            delete newVal.file;
+                            delete newVal._id;
+                            delete newVal.create_dt;
+                            delete newVal.imageShow;
+                            return DBpeople.update({
+                                query: $scope.person._id,
+                                newVal: newVal
+                            }).$promise;
+                        }
+                    }).then(res => {
+                        if (res && res.status === 'error') {
+                            Notification.error('Error:!', res.msg);
+                        } else {
+                            $scope.person = {};
+                            $scope.search();
+                        }
+                    }).catch(err => {
+                        Notification.error('Error:!', err);
+                        //console.log("saveEdited err =============>", err)
+                    })
+            }
+
+            function saveNew() {
                 let fd = new FormData();
                 fd.append('imageDatas', $scope.file);
-                let uploadUrl = '/api/st/verify/face/synAdd?dbName=' + GLOBAL.STDBname;
+                let uploadUrl = '/api/st/verify/face/synAdd?dbName=' + GLOBAL.CONFIG.STDBname;
                 let $promise = $http.post(uploadUrl, fd, {
                     transformRequest: angular.identity,
                     headers: { 'Content-Type': undefined }
                 });
-                // $promise
-                //     .then(data => {
-                //         //console.log('upload data', data);
-                //         if (data.data && data.data.fail && data.data.success.length !== 0) {
-                //             //console.log('data.success', data.data.success);
-                //             return data.data.success;
-                //         } else {
-                //             console.log('data.fail', data.data.fail);
-                //             Notification.error($filter('translate')(data.data.fail[0].errReason));
-                //             //return $q.reject(response); // convert into a rejection
-                //         }
-                //     })
-                //     .then(res => {
-                //         if (res) {
-                //             console.log('res', res);
-                //             let dbData = Object.assign($scope.person, res[0]);
-                //             let now = new Date();
-                //             dbData.create_dt = now;
-                //             DBpeople.create({ data: dbData }).$promise
-                //                 .then(response => {
-                //                     //$scope.tab = '0';
-                //                     $scope.search();
-                //                     return response;
-                //                 })
-                //                 .catch(err => { console.log('err', err); });
-                //         }
-                //     })
-                //     .then(res => {
-                //         console.log('res', res);
-                //     })
-                //     .catch(err => { console.log('err in xxx', err); });
+                $promise.then(data => {
+                        if (data && data.data && data.data.success) {
+                            let res = data.data.success;
+                            //console.log('res', res);
+                            if (res) {
+                                let dbData = Object.assign($scope.person, res[0]);
+                                let now = new Date();
+                                dbData.create_dt = now;
+                                delete dbData.imageShow;
+                                return DBpeople.create({ data: dbData }).$promise
+                            }
+                        } else { return { status: 'error', msg: data.data.fail } }
+                    })
+                    .then(res => {
+                        if (res && res.status === 'error') {
+                            //console.log('Error:!', res.msg);
+                            Notification.error('Error:!', res.msg);
+                        } else {
+                            $scope.person = {};
+                            $scope.search();
+                        }
+                    })
+                    .catch(err => {
+                        //console.log('err in saveNew', err);
+                        Notification.error('Error:!', err);
+                    });
             };
         }
     ]);

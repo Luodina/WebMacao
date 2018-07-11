@@ -1,76 +1,174 @@
-<div style="box-sizing: border-box;">
-    <div style="min-height: 620px;margin:10px;">
-        <div style="width:74%;float:left;background-color:#c0ccda;border-radius:5px;padding: 15px;">
-            <div style="min-height:400px;">
-                <!-- <h4>Captured People - Registered</h4> -->
-                <!-- tyle="border-radius:5px;background-color:#c0ccda;padding:15px; -->
-                <div style="float:left;padding-left: 30px;">
-                    <!-- <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                  Dropdown
-                                  <span class="caret"></span>
-                                </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div> -->
-                    <div>
-                        <h4 align="center" style="padding: 10px;margin:auto; font-weight: bold;height:100px;">{{'web_common_001'| translate}}</h4>
-                        <!-- <div align="center" style="border-color: #e5e5e5;border-bottom-style: solid;border-bottom-width: thin; line-height: 50px;border-top-style: solid;border-top-width: thin;">
-                            Cameras
+<div class="rtm-global" style="box-sizing: border-box;">
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 rtm-cam bck_content_frame">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 rtm-cam-menu">
+                            <div class="rtm-sect-header">
+                                <h4>{{'web_rt_live_stream'| translate}}</h4>
+                            </div>
+                            <!-- <div align="center" style="border-color: #e5e5e5;border-bottom-style: solid;border-bottom-width: thin; line-height: 50px;border-top-style: solid;border-top-width: thin;">
+                                    Cameras
+                                </div> -->
+                            <div class="rtm-sect-body">
+                                <div class="elm_cam" ng-repeat="item in cams">
+                                    <a href="#" ng-click="start_cam_webrtc(item.rtsprt)">
+                                        <span class="elm_cam_field_name">{{item.name}}</span><br/>
+                                        <span class="elm_cam_field_location">{{'web_rt_Location'| translate}}: {{item.location}}</span><br/>
+                                        <!-- <span id="btn_cam_Idx{{$index}}_rtsp" style="display:none">{{item.rtsp}}</span> -->
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Hidden Detail Panel first-->
+                            <!-- <div class="debug_field">
+                                <div id="btn_cam_Idx{{$index}}_detail" class="elm_cam_detail" style="display:none" ng-repeat="item in cams">
+                                    <span>Name: {{item.name}} </span> <br/>
+                                    <span>RTSP: {{item.rtsp}} </span> <br/>
+                                    <span>Location: {{item.location}} </span> <br/>
+                                    <span>Status: {{item.status}} </span> <br/>
+                                    <span class="debug_field">Taskid: {{item.taskid}} </span> <br/>
+                                </div>
+                            </div> -->
+                            <!-- <div style="display:none">
+                            Set source URL: <input style="width:200px;" id="address" type="text" value="rtsp://10.254.0.6/unicast">
+                            <br/>
+                            <a id="start_webrtc" href="#" class="btn btn-success" onclick="start_webrtc()">
+                                <span class="glyphicon glyphicon-play"></span> Start</a>
+                            <a id="stop_webrtc" href="#" class="btn btn-danger" onclick="stop_webrtc()">
+                                <span class="glyphicon glyphicon-stop"></span> Stop</a>
+                            <br/>
+                            <label class="control-label" for="console">Console</label>
+                            <div id="console"></div>
                         </div> -->
-                        <div align="center" style="border-color: #e5e5e5;border-bottom-style: solid; border-bottom-width: thin; line-height: 50px;" ng-repeat="item in [1,2,3]">
-                            <span style="vertical-align:middle;display: table-cell;">Camera {{item}}</span>
+
+                            <!-- <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Dropdown
+                                            <span class="caret"></span>
+                                            </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div> -->
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 rtm-cam-stream">
+                            <!--
+                            <video id="videoOutput" class="rtm-cam-content">
+                            </video>
+                            -->
+                            <div class="rtm-cam-content">
+                                <video id="videoOutput" class="rtm-cam-video" autoplay poster="./img/webrtc.png"></video>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div style="width:75%;float:right;border-radius:5px;background-color:#f5fbff;min-height:400px;">
-
-                </div>
             </div>
-            <div style="width:100%;border-radius:5px;background-color:#f5fbff;height:200px;padding: 10px;margin-top:15px;">
-                <h4>Non-registered</h4>
-                <div style="float:left; min-height:150px;margin-top: 10px; margin-right:10px;" ng-repeat="item in fromdb ">
-                    <div>
-                        <div style="height: 50px;">
-                            <img src={{item.foto}} width="100px" height="50px">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 rtm-nonreg bck_content_frame">
+                    <!--Non Reg -->
+                    <div class="rtm-nonreg-header rtm-sect-header">
+                        <h4>{{'web_rt_non_register'| translate}}</h4>
+                    </div>
+                    <div class="rtm-nonreg-body rtm-sect-body scrollbar-macosx">
+                        <div class="elm_nonreg elm_nonreg_{{$index}}" ng-repeat="item in rtmAll ">
+                            <div>
+                                <img src="data:image/jpg;base64,{{ item.image_file }}" width="100px" height="100px">
+                                <div style="display:none">Index = {{ $index % 2 }}</div>
+                                <div><span class=" {{ item.timediff < 90 ? 'rtm_close' : 'rtm_far' }} ">{{'web_rt_reg_short_time'| translate}}: {{ item.rec_time | date:'HH:mm:ss'}}</span></div>
+                                <div>{{'web_rt_reg_short_location'| translate}}: {{ item.location }} </div>
+                                <div class="debug_field" style="display:none"><span>T/M = {{ item.type }} / {{ item.imgMode }} / {{ item.trackIdx }}</span></div>
+                                <div class="debug_field"><span>S/Q=  {{ item.similarity | number : 3}} / {{ item.qualityScore  | number : 3}}</span></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div style="width:25%;float:right;">
-            <div style="border-radius:5px;background-color:#c0ccda;padding:15px;">
-                <div style="border-radius:5px;background-color:#f5fbff;height:620px;padding: 15px;overflow:scroll;">
-                    <h4>Registered</h4>
-                    <div style="min-height:120px; margin-top:10px;border-color: #c0ccda;border-bottom-style: solid;border-bottom-width: thin;" ng-repeat="item in fromdb ">
-                        <div style="width:50%;float:left;">
-                            <div style="height: 100px;">
-                                <img src={{item.foto}} width="100px" height="100px">
-                            </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-4 rtm-reg bck_content_frame">
+            <div class="rtm-reg-header rtm-sect-header">
+                <h4>{{'web_rt_register'| translate}}</h4>
+            </div>
+            <div class="rtm-reg-body rtm-sect-body scrollbar-macosx">
+                <div class="">
+                    <div class="elm_reg elm_reg_{{$index}}" ng-repeat="item in rtmReg">
+                        <div class="cap_photo">
+                            <img ui-sref="history({user:item._id})" src="data:image/jpg;base64,{{ item.image_file }}">
                         </div>
-                        <div style="width:50%;float:right;height:100px;">
-                            <div style="height: 25%;">
-                                <span>Name {{item.name}}</span>
-                            </div>
-                            <div style="height: 25%;">
-                                <span>Alt Name  {{item.age}}</span>
-                            </div>
-                            <div style="height: 25%;">
-                                Time {{item.age}}
-                            </div>
-                            <div style="height: 25%;">
-                                Location
-                            </div>
+                        <!-- <div class="cap_details">
+                            <div><span>{{'web_rt_reg_name'| translate}}: {{item.details[0].personname}}</span></div>
+                            <div><span>{{'web_rt_reg_altname'| translate}}:  {{item.details[0].altname}}</span></div>
+                            <br/>
+                            <div><span class=" {{ item.timediff < 90 ? 'rtm_close' : 'rtm_far'}} ">{{'web_rt_reg_time'| translate}}: {{ item.rec_time | date:'hh:mm:ss a'}}</span></div>
+                            <div style="display:none"> Reg Date: {{item.details[0].create_dt | date:'dd/MM/yyyy'}} </div>
+                            <div>{{'web_rt_reg_location'| translate}}: {{ item.camdetails[0].location }} </div>
+                            <div class="debug_field"><span>Type/imgM=  {{ item.type }}/ {{ item.imgMode }}/ {{ item.trackIdx }}</span></div>
+                            <div class="debug_field"><span>S/Q=  {{ item.similarity | number : 3}} /{{ item.qualityScore | number : 3}}</span></div>
+                        </div> -->
+                        <div class="cap_details">
+                            <div><span>{{'web_rt_reg_name'| translate}}: {{item.personname}}</span></div>
+                            <div><span>{{'web_rt_reg_altname'| translate}}:  {{item.altname}}</span></div>
+                            <br/>
+                            <div><span class=" {{ item.timediff < 90 ? 'rtm_close' : 'rtm_far'}} ">{{'web_rt_reg_time'| translate}}: {{ item.rec_time | date:'hh:mm:ss a'}}</span></div>
+                            <div style="display:none"> Reg Date: {{item.create_dt | date:'dd/MM/yyyy'}} </div>
+                            <div>{{'web_rt_reg_location'| translate}}: {{ item.location }} </div>
+                            <div class="debug_field"><span>Type/imgM=  {{ item.type }}/ {{ item.imgMode }}/ {{ item.trackIdx }}</span></div>
+                            <div class="debug_field"><span>S/Q=  {{ item.similarity | number : 3}} /{{ item.qualityScore | number : 3}}</span></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 </div>
-</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery('.scrollbar-macosx').scrollbar();
+        //alert("done");
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        recalculateDivSize();
+    });
+
+    $(window).resize(function() {
+        //alert("Screen REsized");
+        recalculateDivSize();
+    });
+
+    function recalculateDivSize() {
+        var navbar_header_height = $(".navbar-header").height();
+        var window_height = $(window).height() - navbar_header_height;
+
+        //var cam_stream_height = window_height * 0.55;
+        var cam_stream_height = $(".rtm-cam-content").height();
+        var nonReg_height = window_height - cam_stream_height; //* 0.45;
+
+
+        //$(".rtm-cam").css("height", cam_stream_height);
+        //$(".rtm-cam-content").css("height", cam_stream_height -20 ); //Pading
+
+        //$(".rtm-nonreg").css("height", nonReg_height);
+
+        $(".rtm-nonreg-body").css("height", nonReg_height - $(".rtm-nonreg-header").height() - 60); //Boarder + padding
+
+        //$(".rtm-reg").css("height", window_height);
+        $(".rtm-reg-body").css("height", window_height - $(".rtm-reg-header").height() - 50);
+
+        var debug_msg = "";
+        //debug_msg += "  W=" + $(window).width();
+        //debug_msg += "  H=" + $(window).height();
+        debug_msg += "  nonReg_height=" + nonReg_height;
+        window_height
+        $("#debug_info").text(debug_msg);
+    }
+</script>

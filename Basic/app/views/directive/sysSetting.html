@@ -1,12 +1,14 @@
-<div>
-    <div>
-        <div style="border-radius:5px;background-color:rgb(236, 233, 233);margin:10px;min-height:150px;padding:10px;">
-            <h4>System Setting</h4>
-            <table style="width:50%; margin:10px;vertical-align: middle; border-color:rgb(236, 233, 233)">
-                <tbody style="vertical-align: middle; border-color:rgb(236, 233, 233)">
-                    <tr style="vertical-align: middle; border-color:rgb(236, 233, 233)">
-                        <td style="width: 120px;">Similarity Level (%)</td>
-                        <td>High:</td>
+<div class="setting-section">
+    <div class="setting-section-header">
+        <h4>{{'web_sett_menu_sys'| translate }}</h4>
+    </div>
+    <div class="setting-section-body">
+        <div>
+            <table>
+                <tbody style="vertical-align: middle">
+                    <tr>
+                        <td style="width: 120px;">{{'web_sett_sys_similarity'| translate }}</td>
+                        <td>{{'web_common_high'| translate }}:</td>
                         <td>100</td>
                         <td>-</td>
                         <td>
@@ -15,16 +17,16 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Medium</td>
+                        <td>{{'web_common_mid'| translate }}</td>
                         <td>80</td>
                         <td>-</td>
                         <td>
-                            <input type="text" ng-model="ss.medium" class="form-control" placeholder="80" aria-describedby="basic-addon1" style="border-radius:4px;width: 30%;">
+                            <input type="text" ng-model="ss.middle" class="form-control" placeholder="100" aria-describedby="basic-addon1" style="border-radius:4px;width: 30%;">
                         </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Low</td>
+                        <td>{{'web_common_low'| translate }}</td>
                         <td>60</td>
                         <td>-</td>
                         <td>
@@ -33,37 +35,42 @@
                     </tr>
                 </tbody>
             </table>
-            Note:Similarity lower than 40 will consider as non-Registered People
+        </div>
+        <div style="padding-top:10px">
+            <span>
+                {{'web_sett_sys_note_1'| translate }} 40 {{'web_sett_sys_note_2'| translate }}
+            </span>
         </div>
     </div>
-    <div style="border-radius:5px;background-color:rgb(236, 233, 233);margin:10px; margin-top:0px;min-height:150px;padding:10px;">
-        <h4>SenseServer Setting</h4>
+</div>
+<div class="setting-section">
+    <div class="setting-section-header">
+        <h4>{{'web_sett_menu_cam_server'| translate }}</h4>
+    </div>
+    <div class="setting-section-body">
         <table style="margin:10px;vertical-align: middle; border-color:rgb(236, 233, 233)">
             <tbody style="vertical-align: middle; border-color:rgb(236, 233, 233)">
                 <tr style="vertical-align: middle; border-color:rgb(236, 233, 233)">
-                    <td style="width: 200px;">DataBase Name</td>
-                    <td>
-                        <input type="text" ng-model="ss.db" class="form-control" placeholder="staffDB" aria-describedby="basic-addon1" style="border-radius:4px;">
+                    <td style="width: 200px;">{{'web_sett_sys_ser_dbname'| translate }}</td>
+                    <td><input type="text" ng-model="ss.db" class="form-control" placeholder="staffDB" aria-describedby="basic-addon1" style="border-radius:4px;">
                     </td>
-                    <td>Need to Re-initialize senseServer after changing the database name.</td>
+                    <td>{{'web_sett_sys_ser_dbnote'| translate }}</td>
                 </tr>
                 <tr>
-                    <td style="width: 200px;">SenseServer Connection</td>
-                    <td>
-                        <input type="text" ng-model="ss.ip" class="form-control" placeholder="e.g.192.168.1.100:3401" aria-describedby="basic-addon1" style="border-radius:4px;">
+                    <td style="width: 200px;">{{'web_sett_sys_ser_conn'| translate }}</td>
+                    <td><input type="text" ng-model="ss.ip" class="form-control" placeholder="e.g.192.168.1.100:3401" aria-describedby="basic-addon1" style="border-radius:4px;">
                     </td>
-                    <td>SenseServer Connection.Use[IP]:[Port]format</td>
+                    <td>{{'web_sett_sys_ser_conn_note'| translate }}</td>
                 </tr>
-
             </tbody>
         </table>
-        <button type="button" ng-click="initServer()" class="btn btn-primary red">Init SenseServer</button>
-
-    </div>
-    <div>
-        <button type="button" ng-click="save()" class="btn btn-primary">Save</button>
-        <button type="button" ui-sref="setting" ui-sref-opts="{reload: true, notify: true}" class="btn btn-primary red">Cancel</button>
-        <button type="button" ng-click="test()" class="btn btn-primary">Test Connection</button>
+        <button type="button" ng-click="initServer()" class="btn btn-danger">{{'web_sett_sys_ser_reset'| translate }}</button>
     </div>
 </div>
+<div>
+    <div>
+        <button type="button" ng-click="save()" class="btn btn-primary">{{'web_common_save'| translate }}</button>
+        <button type="button" ui-sref="setting" ui-sref-opts="{reload: true, notify: true}" class="btn btn-primary">{{'web_common_cancel'| translate }}</button>
+        <button type="button" ng-click="test()" class="btn btn-primary">{{'web_sett_sys_ser_test_conn'| translate }}</button>
+    </div>
 </div>

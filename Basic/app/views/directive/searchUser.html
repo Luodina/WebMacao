@@ -1,22 +1,31 @@
-<div style="padding-top:20px">
-    <table class="table table-striped" style="width:80%; margin:auto;">
-        <thead class="thead-light" style="background-color:#eaeaea">
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Role</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="user in users">
-                <td>{{user.name}}</th>
-                    <td>{{user.role}}</td>
-                    <td>{{user.status}}</td>
-                    <td>
-                        <button type="button" ng-click="userEdit(user)" class="btn btn-primary">Edit</button>
-                    </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="setting-section">
+    <div class="setting-section-header">
+        <h4>{{'web_sett_menu_user_search'| translate }}</h4>
+    </div>
+    <div class="setting-section-body">
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">{{'web_sett_user_name'| translate }}</th>
+                    <th scope="col">{{'web_sett_user_role'| translate }}</th>
+                    <th scope="col">{{'web_common_status'| translate }}</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users">
+                    <td>{{user.name}}</th>
+                        <td>{{user.role}}</td>
+                        <!-- <td>{{user.status}} </td> -->
+                        <td>
+                            <button type="button" ng-click="userEdit(user)" class="btn btn-primary">{{'web_common_edit'| translate }}</button>
+                        </td>
+                        <td>
+                            <button type="button" ng-click="userDelete(user)" class="btn btn-danger">{{'web_common_delete'| translate }}</button>
+                        </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

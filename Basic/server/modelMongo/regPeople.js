@@ -4,7 +4,6 @@ let mongoose = require('mongoose');
 let regPeopleScheme = new mongoose.Schema({
     personname: {
         type: String,
-        unique: true,
         required: true
     },
     altname: {
@@ -25,6 +24,10 @@ let regPeopleScheme = new mongoose.Schema({
     },
     name: {
         type: String,
+        required: true
+    },
+    image: {
+        type: String, //Buffer,
         required: true
     },
     imageId: {

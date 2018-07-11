@@ -1,25 +1,24 @@
-### FROM docker-registry-default
+FROM alpine:latest
 
-COPY Basic/app /prod/app
-COPY Basic/server /prod/server
-COPY Basic/template /prod/template
-COPY Basic/gulpfile.babel.js /prod/gulpfile.babel.js
-COPY Basic/.jshintrc /prod/.jshintrc
-RUN mv /prod/bower_components /prod/app/bower_components
-RUN ls
-# RUN npm install -just in case bower.json has been updated recently
-COPY Basic/bower.json /prod/app/bower.json
-WORKDIR /prod/app
-RUN bower install
+COPY Basic /prod
 WORKDIR /prod
-# RUN npm install -just in case package.json has been updated recently
-COPY Basic/package.json /prod/package.json
+RUN ls -a
+RUN apk add --update nodejs git && \
+    npm install -g bower && \
+    echo '{ "allow_root": true }' > /root/.bowerrc && \
+    git config --global url."https://".insteadOf git:// 
+RUN bower --v
+RUN bower install --allow-root
+RUN npm --v
+RUN ls -a
 RUN npm install
+# install gulp globally
 RUN npm install --global gulp-cli 
+# install gulp locally
+RUN npm install gulp
+# RUN npm i -S babel-register
+RUN npm rebuild node-sass --force
+RUN gulp --v
+RUN ls server/
 RUN gulp build
-EXPOSE 9000
-
-CMD ["gulp", "serve"]
-
-
 

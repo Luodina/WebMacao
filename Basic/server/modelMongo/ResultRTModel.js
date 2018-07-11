@@ -1,9 +1,9 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var SchemaTypes = mongoose.Schema.Types;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
+//let SchemaTypes = mongoose.Schema.Types;
 
-var resultRTModelSchema = new Schema({
+let resultRTModelSchema = new Schema({
     taskid: {
         type: String
     },
@@ -22,26 +22,26 @@ var resultRTModelSchema = new Schema({
     image_file: {
         type: Buffer
     },
-
     similarity: {
         //type: SchemaTypes.Long,
         type: Number
     },
-    user_idx: {
-        //type: SchemaTypes.Long,
-        type: String
-    },
-
     qualityScore: {
         //type: SchemaTypes.Long,
         type: Number
     },
-
     rec_time: {
         type: Date
+    }, //Raw string, for comparison
+    imgMode: {
+        type: Number
     },
-
-
+    type: {
+        type: Number
+    },
+    trackIdx: {
+        type: String
+    },
     create_dt: {
         type: Date,
         default: Date.now

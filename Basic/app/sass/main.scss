@@ -1,8 +1,16 @@
 $color0: #bababa; // #3d63d9;//navbar hover
 $color1:#e0e6ed; // #4847ff;
-$color2: #969696; // #4874ff;//navbar background
+$color2: #262626; // #4874ff;//navbar background
+$color_navbar_bck: #FFFFFF; // #4874ff;//navbar background
+$color_navbar_hover_bck: #bababa; // #4874ff;//navbar background
+$color_navbar_text: #666666; // #4874ff;//navbar background
+
 $color3: #e5e5e5; //#3c63d9;
 $color4:#d8d8d8; // #6d90ff; // navbar dropdown link
+$color_background: #e6e6e6;
+
+$color_contentbck: #ffffff;
+
 //#3c4858
 html,
 body {
@@ -100,25 +108,34 @@ textarea:focus {
 body {
     padding: 0;
     margin: 0;
+    background-color:$color_background;
     .browsehappy {
         margin: 0.2em 0;
-        background: #ccc;
+        background: $color_background;
         color: #000;
         padding: 0.2em 0;
     }
     .header {
         height: 54px;
         clear: both;
+        .navbar-header{
+            height: 54px;
+            padding-right:20px;
+        }
+        .navbar-header>a>img{
+            height: 54px;
+        }
         .navbar-au {
-            background: $color2;
+            background: $color_navbar_bck;
             font-size: 14px;
             margin-bottom: 0;
             border-radius: 0px;
+            box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
             .logo {
                 color: #ffffff;
             }
             .navbar-head {
-                color: #fff;
+                color: $color_navbar_text;
                 padding-right: 0px !important;
                 .navbar-right {
                     .help_tit {
@@ -136,7 +153,7 @@ body {
                     .head_index {
                         float: left;
                         display: block;
-                        width: 142px;
+                        min-width: 142px;
                         position: relative;
                         cursor: pointer;
                         .per_block {
@@ -148,7 +165,7 @@ body {
                             height: 52px;
                             .header_per_tit {
                                 font-size: 14px;
-                                color: #fff;
+                                color: $color_navbar_text;
                                 display: block;
                                 float: left;
                                 white-space: nowrap;
@@ -215,18 +232,26 @@ body {
                 }
                 .nav-top>a {
                     display: block;
-                    padding: 0 20px;
-                    height: 52px;
-                    line-height: 52px;
+                    padding: 0 10px;
+                    margin: 8px 10px;
+                    height: 36px; //52px
+                    line-height: 36px;
                     text-decoration: none;
-                    color: #ffffff;
+                    color: $color_navbar_text;
                     float: left;
+                    .icon-head {
+                        padding-right: 5px;
+                    }
                 }
                 .nav-top>.active {
-                    background: $color0;
+                    //background: $color0;
+                    background: $color_navbar_hover_bck;
+                    
                 }
                 .nav-top>a:hover {
-                    background: $color0;
+                    //background: $color0;
+                    //background: $color_navbar_hover_bck;
+                    border-bottom: solid 3px orangered;
                 }
             }
         }
@@ -273,53 +298,31 @@ body {
                 right: 0;
                 margin: 0 auto;
                 width: 500px;
-                .conTitle {
-                    padding: 20px 0;
-                    margin: 0;
-                    font-size: 24px;
-                    color: #333;
-                    /*line-height: 24px;*/
-                    /*height: 24px;*/
-                    text-align: center;
-                }
+                
                 .conCont {
                     border: solid 1px #f2f2f2;
+                    border-radius: 15px;
                     padding: 40px;
-                    padding-top: 60px;
+                    background-color: white;
+                    .conTitle {
+                        padding: 20px 0 40px 0;
+                        margin: 0;
+                        font-size: 24px;
+                        color: #333;
+                        text-align: center;
+                    }
+                    .conError {
+                        padding: 10px 0 20px 0;
+                        text-align: center;
+                        min-height: 50px;
+                    }
                     .conOne {
                         padding-top: 0;
+                        padding-bottom: 20px;
                         label {
-                            font-size: 14px;
+                            font-size: 16px;
                             color: #666;
-                            font-weight: normal;
-                        }
-                        .textRgt {
-                            font-size: 14px;
-                            float: right;
-                            color: red;
-                        }
-                        .ipt {
-                            /*padding-top: 10px;*/
-                            display: inline-block;
-                            width: 410px;
-                            height: 38px;
-                            background: #f7f8fa;
-                            border: solid 1px #eaeaea;
-                            padding: 0 10px;
-                            font-size: 14px;
-                        }
-                    }
-                    .conTwo {
-                        margin-top: 30px;
-                        label {
-                            font-size: 14px;
-                            color: #666;
-                            font-weight: normal;
-                        }
-                        .textRgt {
-                            font-size: 14px;
-                            float: right;
-                            color: red;
+                            font-weight: bold;
                         }
                         .ipt {
                             /*padding-top: 10px;*/
@@ -338,7 +341,7 @@ body {
                         color: #666666;
                     }
                     .btn {
-                        margin-top: 40px;
+                        margin-top: 20px;
                         width: 418px;
                         height: 38px;
                         border-radius: 2px;
@@ -708,7 +711,7 @@ div.ng-invalid.ng-touched.ui-select-container span.ui-select-toggle {
 
 //fenye
 .pagination {
-    float: right;
+    float: left;
     margin-right: 10px;
 }
 
@@ -726,4 +729,16 @@ td {
 
 th {
     text-align: left;
+}
+
+.bck_content_frame{
+    //background-color: #FFFFFF;
+    background-color:red;
+    // /margin: 5px;
+    
+    //border-style: solid;
+    // border-color: black;
+    //border-bottom-width: thin;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
 }

@@ -1,55 +1,73 @@
+<div class="setting-section">
+    <div class="setting-section-header">
+        <h4> {{msg == 'Add' ? 'web_sett_cam_add_title' : 'web_sett_cam_edit_title' | translate }}</h4>
+    </div>
+    <div class="setting-section-body">
+        <form name="frm">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <label>{{ 'web_sett_cam_name' | translate }}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <input type="text" ng-model="camera.name" class="form-control" placeholder="{{ 'web_sett_cam_name' | translate }}" aria-describedby="basic-addon1" style="border-radius:4px">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <label>{{ 'web_common_location' | translate }}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <input type="text" ng-model="camera.location" class="form-control" placeholder="{{ 'web_common_location' | translate }}" aria-describedby="basic-addon1" style="border-radius:4px">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <label>{{ 'web_sett_cam_rtsp' | translate }}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <input type="text" ng-model="camera.rtsp" class="form-control" placeholder="{{ 'web_sett_cam_rtsp' | translate }}" aria-describedby="basic-addon1" style="border-radius:4px">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <label>{{ 'web_sett_cam_rtsp' | translate }} RT:</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <input type="text" ng-model="camera.rtsprt" class="form-control" placeholder="{{ 'web_sett_cam_rtsp' | translate }} RT" aria-describedby="basic-addon1" style="border-radius:4px">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <label>{{ 'web_common_status' | translate }} </label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 checkbox">
+                    <label><input type="checkbox" ng-model="camera.status" ng-checked="camera.status">{{'web_common_active_use'| translate }}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <label>{{ 'web_common_remark' | translate }}</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <textarea class="form-control" ng-model="camera.remarks" rows="3" placeholder="{{ 'web_common_remark' | translate }}"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <button type="button" ng-click="applyCamera()" class="btn btn-primary">{{msg == 'Add' ? 'web_common_add' : 'web_common_update' | translate }}</button>
+                    <button type="button" class="btn btn-primary" ui-sref="setting" ui-sref-opts="{reload: true, notify: true} ">{{'web_common_cancel'| translate }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div>
     <form name="frm">
         <div style="margin:auto;width:400px">
-            <h4 style="margin-top:20px">{{msg}} Camera</h4>
-            <div style="margin-top:20px;margin-bottom:20px;height:34px;">
-                <div style="float:left;height:34px;vertical-align:middle;width:40%">
-                    <label>Name</label>
-                </div>
-                <div style="float:right;width:60%">
-                    <input type="text" ng-model="camera.name" class="form-control" placeholder="Name" aria-describedby="basic-addon1" style="border-radius:4px">
-                </div>
-            </div>
-            <div style="margin-bottom:20px;height:34px;">
-                <div style="float:left;height:34px;width:40%">
-                    <label>Location</label>
-                </div>
-                <div style="float:right;width:60%">
-                    <input type="text" ng-model="camera.location" class="form-control" placeholder="Location" aria-describedby="basic-addon1" style="border-radius:4px">
-                </div>
-            </div>
-            <div style="margin-bottom:20px;height:34px;">
-                <div style="float:left;height:34px;width:40%">
-                    <label>RTSP URL</label>
-                </div>
-                <div style="float:right;width:60%">
-                    <input type="text" ng-model="camera.rtsp" class="form-control" placeholder="RTSP URL" aria-describedby="basic-addon1" style="border-radius:4px">
-                </div>
-            </div>
-            <div style="margin-bottom:20px;height:34px;">
-                <div style="float:left;height:34px;width:40%;">
-                    <label>Status </label>
-                </div>
-                <div style="float:right;width:60%" class="checkbox">
-                    <label><input type="checkbox" ng-model="camera.status" ng-checked="camera.status">Active</label>
-                </div>
-            </div>
-            <div style="height:80px;">
-                <div style="float:left;width:40%;vertical-align:middle;display: table-cell;">
-                    <label style="display: inline-block;vertical-align: middle">Remarks</label>
-                </div>
-                <div style="float:right;width:60%">
-                    <textarea class="form-control" ng-model="camera.remarks" rows="3" placeholder="Remarks"></textarea>
-                </div>
-            </div>
-            <div style="margin-bottom:20px;height:34px;">
-                <div style="float:left;height:34px;">
-                </div>
-                <div style="float:right;width:60%;">
-                    <button style="float:right;width:70px;margin-left:10px;" type="button" class="btn btn-primary" ui-sref="setting" ui-sref-opts="{reload: true, notify: true} ">Cancel</button>
-                    <button style="float:right;width:70px" type="button" ng-click="applyCamera()" class="btn btn-primary">{{msg}}</button>
-                </div>
-            </div>
+            <h4 style="margin-top:20px"></h4>
+
         </div>
     </form>
 </div>

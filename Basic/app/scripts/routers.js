@@ -12,27 +12,33 @@ angular.module('basic.routers', ['ui.router'])
                 name: 'rtm',
                 url: '/rtm',
                 templateUrl: 'views/rtm/rtm.html',
-                controller: 'RtmCtrl'
+                controller: 'RtmCtrl',
+                resolve: {
+                    cameras: ['DBcameras',
+                        function(DBcameras) {
+                            return DBcameras.query({}).$promise;
+                        }
+                    ]
+                }
             },
             {
                 name: 'people',
                 url: '/people',
                 templateUrl: 'views/people.html',
                 controller: 'PeopleCtrl'
-                    // ,
-                    // resolve: {
-                    // people: ['DBpeople',
-                    //     function(DBpeople) {
-                    //         return DBpeople.query({}).$promise;
-                    //     }
-                    // ]
-                    // }
             },
             {
                 name: 'history',
-                url: '/history',
+                url: '/history?user',
                 templateUrl: 'views/history.html',
-                controller: 'HistoryCtrl'
+                controller: 'HistoryCtrl',
+                resolve: {
+                    cameras: ['DBcameras',
+                        function(DBcameras) {
+                            return DBcameras.query({}).$promise;
+                        }
+                    ]
+                }
             },
             {
                 name: 'setting',
@@ -42,13 +48,14 @@ angular.module('basic.routers', ['ui.router'])
                 resolve: {
                     tasks: ['STtasks',
                         function(STtasks) {
-                            return STtasks.get({}).$promise
-                                .then(function(data) {
-                                    return data;
-                                })
-                                .catch(function(error) {
-                                    return { resolveError: error };
-                                })
+                            return {};
+                            // STtasks.get({}).$promise
+                            //     .then(function(data) {
+                            //         return data;
+                            //     })
+                            //     .catch(function(error) {
+                            //         return { resolveError: error };
+                            //     });
                         }
                     ],
                     cameras: ['DBcameras',
@@ -57,6 +64,11 @@ angular.module('basic.routers', ['ui.router'])
                         }
                     ]
                 }
+            }, {
+                name: 'analytics',
+                url: '/analytics',
+                templateUrl: 'views/analytics.html',
+                controller: 'AnalyticsCtrl'
             },
             {
                 name: 'person',

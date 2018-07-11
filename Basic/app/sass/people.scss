@@ -45,3 +45,33 @@
         border: 1px solid #4874ff;
     }
 }
+
+.people-content{
+    padding-top : 10px ;
+    padding-left : 0px ;
+    background-color: #FFFFFF;
+    .menu_region{
+        padding-left : 0px ;
+    }
+    .people-section {
+        padding : 20px ;
+        
+        .people-section-header{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom-style: solid;
+            border-color: #e5e5e5;
+        }
+        .people-section-body{
+            padding-top: 20px;
+            padding-bottom: 10px;
+            .row{
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+            .people-section-body-search{
+
+            }
+        }
+    }
+}

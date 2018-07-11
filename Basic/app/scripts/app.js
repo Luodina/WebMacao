@@ -19,7 +19,6 @@ angular
         'ngCookies',
         'ui.select',
         'toggle-switch',
-        'cfp.hotkeys',
         'ui.bootstrap.datetimepicker',
         'angularMoment',
         'chart.js',
@@ -38,11 +37,13 @@ angular
     .constant('GLOBAL', {
         host_user: './api/user',
         host_people: './api/people',
+        host_history: './api/history',
         STserver: './api/st',
         db: './api/db',
-        STDBname: 'Web_test',
-        STresURL: '10.254.0.116:3000',
-        STDBscore: '0.5'
+        // STDBname: 'TEST03',
+        // STresURL: '10.254.0.198:3040/collectresult',
+        // STDBscore: '0.5',
+        // PERIOD: 1000
     })
     .config(['$translateProvider', '$windowProvider', function($translateProvider, $windowProvider) {
         let window = $windowProvider.$get();
@@ -63,23 +64,37 @@ angular
             positionX: 'right',
             positionY: 'bottom'
         });
-        usSpinnerConfigProvider.setDefaults({ color: 'orange', radius: 0 });
+        usSpinnerConfigProvider.setDefaults({ color: 'grey', radius: 0 });
         ChartJsProvider.setOptions({
             chartColors: ['#4da9ff', '#79d2a6', '#ff9900', '#ff704d', '#669999', '#4d0000']
         });
     }])
-    .run(['$rootScope', '$location', '$cookies', function($rootScope, $location, $cookies) {
+    .run(['$rootScope', '$location', '$cookies', '$translate', 'GLOBAL', '$http', function($rootScope, $location, $cookies, $translate, GLOBAL, $http) {
+        $rootScope.lang = 'en';
         $rootScope.showTitle = true;
         $rootScope.$on('$stateChangeStart', function(toState) {
             $rootScope.active = toState.name;
+            $http.get('/api/config').then(data => {
+                if (data) {
+                    GLOBAL.CONFIG = data.data;
+                }
+            }).catch(err => { console.log('init err') })
             $rootScope.username = $cookies.get('username');
         });
         $rootScope.logout = () => {
+            $cookies.remove('username');
+            $cookies.remove('token');
+            $rootScope.username = null;
             $location.path('/');
         };
         $rootScope.getUsername = () => {
             return $cookies.get('username');
         };
+        $rootScope.changeLang = () => {
+            $rootScope.lang = $translate.use();
+            let lang = ($translate.use() === 'zh') ? 'en' : 'zh';
+            $translate.use(lang);
+        }
     }])
     // .run(function($state) {
     //     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {

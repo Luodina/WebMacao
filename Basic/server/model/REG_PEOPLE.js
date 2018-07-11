@@ -1,51 +1,64 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-    return sequelize.define('CAMERA', {
+    return sequelize.define('REG_PEOPLE', {
         _ID: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV1,
             allowNull: false,
             primaryKey: true
         },
+        PERSONNAME: {
+            type: DataTypes.CHAR(32),
+            allowNull: false
+        },
+        ALTNAME: {
+            type: DataTypes.CHAR(32),
+            allowNull: false
+        },
+        SEX: {
+            type: DataTypes.CHAR(1),
+            allowNull: false
+        },
+        NATIONALITY: {
+            type: DataTypes.CHAR(32),
+            allowNull: false
+        },
+        REMARKS: {
+            type: DataTypes.CHAR(100),
+            allowNull: false
+        },
         NAME: {
             type: DataTypes.CHAR(32),
             allowNull: false
         },
-        LOCATION: {
+        IMAGE: {
+            type: DataTypes.BLOB, //Buffer,
+            allowNull: false
+        },
+        IMAGEID: {
             type: DataTypes.CHAR(32),
             allowNull: false
         },
-        RTSP: {
+        PERSONID: {
             type: DataTypes.CHAR(32),
             allowNull: false
         },
-        RTSPRT: {
-            type: DataTypes.CHAR(32),
+        FEATURE: {
+            type: DataTypes.BLOB,
             allowNull: false
-        },
-        STATUS: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false
-        },
-        REMARKS: {
-            type: DataTypes.CHAR(32),
-            allowNull: true
-        },
-        TASK_ID: {
-            type: DataTypes.CHAR(32),
-            allowNull: true
         },
         CREATE_DATE: {
             type: DataTypes.DATE,
-            defaultValue: DataTypes.NOW
+            defaultValue: DataTypes.NOW,
+            allowNull: false
         },
-        DEL_DATE: {
+        UPDATE_DATE: {
             type: DataTypes.DATE,
             allowNull: true
         }
     }, {
         createdAt: false,
         updatedAt: false,
-        tableName: 'CAMERA'
+        tableName: 'REG_PEOPLE'
     });
 };

@@ -1,87 +1,124 @@
-<div>
-    <div class="setting-menu">
-        <div align="center" ng-class="{'active' : tab == 1}" ng-click="clicked(1)" class="setting-menu-tab">
-            System Setting
-        </div>
-        <div align="center" ng-click="userManagementShow()" class="setting-menu-tab">
-            User Management
-            <i ng-show="!isUserManagementShow" class="glyphicon glyphicon-menu-down"></i>
-            <i ng-show="isUserManagementShow" class="glyphicon glyphicon-menu-up"></i>
-        </div>
-        <div ng-show="isUserManagementShow" align="center" ng-class="{'active' : tab == 2}" ng-click="clicked(2)" class="setting-menu-tab">
-            Add User
-        </div>
-        <div ng-show="isUserManagementShow" align="center" ng-class="{'active' : tab == 3}" ng-click="clicked(3)" class="setting-menu-tab">
-            Search User
-        </div>
-        <div align="center" ng-click="cameraSettingShow()" class="setting-menu-tab">
-            Camera Setting
-            <i ng-show="!isCameraSettingShow" class="glyphicon glyphicon-menu-down"></i>
-            <i ng-show="isCameraSettingShow" class="glyphicon glyphicon-menu-up"></i>
-        </div>
-        <div align="center" ng-show="isCameraSettingShow" ng-class="{'active' : tab == 4}" ng-click="clicked(4)" class="setting-menu-tab">
-            Add Camera
-        </div>
-        <div align="center" ng-show="isCameraSettingShow" ng-repeat="camera in cameras" class="setting-menu-tab" ng-class="{'active' : tab == 4}" ng-click="clicked(4,camera)">
-            <span style="vertical-align:middle;display: table-cell;">Camera {{camera.name}}</span>
-        </div>
-    </div>
-    <div style="width:85%;height:100%;float:right;min-height: 700px;">
-        <div ng-init="tab == 0" ng-show='tab == 0'>
-            <div>
-                <div style="margin:10px">
-                    <div style="border-radius:5px;background-color:rgb(236, 233, 233);;margin-top:10px;min-height:150px;padding-top: 10px;padding-left: 10px;">
-                        <h4>Sense Server</h4>
-                        <h5>Status
-                            <span ng-show="serverStatus=='Active'" style="color:green;">{{serverStatus}} </span>
-                            <span ng-show="!(serverStatus=='Active')" style="color:red">{{serverStatus}} </span>
-                        </h5>
+<div class="row setting-content">
+    <div class="col-lg-12 col-md-12 col-sm-12 menu_region">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 menu_region">
+                <div class="setting-menu">
+                    <div ng-if="role=='super'" align="center" ng-class="{'active' : tab == 1}" ng-click="clicked(1)" class="setting-menu-tab">
+                        <i class="glyphicon glyphicon-cog icon-head"></i> {{'web_sett_menu_sys'| translate }}
                     </div>
-                    <div style="border-radius:5px;background-color:rgb(236, 233, 233);;margin-top:15px;min-height:350px;padding-top: 10px;padding-left: 10px;padding-right: 10px;">
-                        <h4>Cameras</h4>
-                        <table class="table" style="margin-top:15px;margin-right:15px;">
-                            <thead class="thead-light" style="background-color:#eaeaea">
-                                <tr>
-                                    <th scope="col">Camera</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Message</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="camera in cameras">
-                                    <th>{{camera.name}}</th>
-                                    <td>{{camera.statusShow}}</td>
-                                    <td>{{camera.remarks}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div ng-if="isUserManagement" align="center" ng-click="userManagementShow()" class="setting-menu-tab">
+                        <i class="glyphicon glyphicon-user icon-head"></i> {{'web_sett_menu_user_mgnt'| translate }}
+                        <i ng-show="!isUserManagementShow" class="glyphicon glyphicon-menu-down icon-tail"></i>
+                        <i ng-show="isUserManagementShow" class="glyphicon glyphicon-menu-up icon-tail"></i>
+                    </div>
+                    <div ng-show="isUserManagementShow" align="center" ng-class="{'active' : tab == 2}" ng-click="clicked(2)" class="setting-menu-tab setting-menu-tab-child">
+                        <i class="glyphicon glyphicon-plus icon-head"></i> {{'web_sett_menu_user_add'| translate }}
+                    </div>
+                    <div ng-show="isUserManagementShow" align="center" ng-class="{'active' : tab == 3}" ng-click="clicked(3)" class="setting-menu-tab setting-menu-tab-child">
+                        <i class="glyphicon glyphicon-search icon-head"></i> {{'web_sett_menu_user_search'| translate }}
+                    </div>
+                    <div align="center" ng-click="cameraSettingShow()" class="setting-menu-tab">
+                        <i class="glyphicon glyphicon-facetime-video icon-head"></i> {{'web_sett_menu_cam'| translate }}
+                        <i ng-show="!isCameraSettingShow" class="glyphicon glyphicon-menu-down icon-tail"></i>
+                        <i ng-show="isCameraSettingShow" class="glyphicon glyphicon-menu-up icon-tail"></i>
+                    </div>
+                    <div align="center" ng-show="isCameraSettingShow" ng-class="{'active' : tab == 4}" ng-click="clicked(4)" class="setting-menu-tab setting-menu-tab-child">
+                        <i class="glyphicon glyphicon-plus icon-head"></i> {{'web_sett_menu_cam_add'| translate }}
+                    </div>
+                    <div align="center" ng-show="isCameraSettingShow" ng-repeat="camera in cameras" class="setting-menu-tab setting-menu-tab-child" ng-class="{'active' : tab == 4}" ng-click="clicked(4,camera)">
+                        <span style="vertical-align:middle;display: table-cell;">
+                            <i class="glyphicon glyphicon-facetime-video icon-head"></i> 
+                            {{camera.name}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-10 setting-body">
+                <!-- Dashboard -->
+                <div ng-init="tab == 0" ng-show='tab == 0'>
+                    <div class="setting-section">
+
+                        <div class="setting-section-header">
+                            <h4>{{'web_sett_menu_cam_server'| translate }}</h4>
+                        </div>
+                        <div class="setting-section-body">
+                            <h5>{{'web_common_status'| translate }} :
+                                <span ng-show="serverStatus=='Active'" style="color:green;">{{'web_common_active_use'| translate }} </span>
+                                <span ng-show="!(serverStatus=='Active')" style="color:red">{{'web_common_inactive_use'| translate }}  </span>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="setting-section">
+                        <div class="setting-section-header">
+                            <h4>{{'web_common_camera'| translate }}</h4>
+                        </div>
+                        <div class="setting-section-body">
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th style="width:20%" scope="col">{{'web_common_camera'| translate }}</th>
+                                        <th style="width:20%" scope="col">{{'web_common_status'| translate }}</th>
+                                        <th style="width:30%" scope="col">{{'web_common_message'| translate }}</th>
+                                        <th style="width:30%" scope="col"></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-show="cameras.length>0" ng-repeat="camera in cameras">
+                                        <th>{{camera.name}}</th>
+                                        <td>{{camera.statusShow}}</td>
+                                        <td>{{camera.remarks}}</td>
+                                        <td>
+                                            <button type="button" ng-click="cameraDelete(camera.taskid, camera._id, camera.statusShow)" class="btn btn-danger">{{'web_common_delete'| translate }}</button>
+                                        </td>
+                                    </tr>
+                                    <!-- <div ng-show="taskIds.length==0">
+                                        <span us-spinner="{color:blue,radius:30, width:8, length: 16}" spinner-key="spinner-1" spinner-start-active="true"></span>
+                                    </div> -->
+                                </tbody>
+                            </table>
+                            <div align="center" ng-show="cameras.length==0">No registered cameras yet!</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Different sub page -->
+                <div ng-show='tab == 1'>
+                    <div ng-controller="SysSettingCtrl">
+                        <div sys-setting class="sys-setting "></div>
+                    </div>
+                </div>
+                <div ng-show='tab == 2'>
+                    <div ng-controller="AddUserCtrl">
+                        <div add-user class="add-user"></div>
+                    </div>
+                </div>
+                <div ng-show='tab == 3'>
+                    <div ng-controller="SearchUserCtrl">
+                        <div search-user></div>
+                    </div>
+                </div>
+                <div ng-show='tab == 4'>
+                    <div ng-controller="AddCameraCtrl">
+                        <div add-camera class="add-camera"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div ng-show='tab == 1'>
-            <div ng-controller="SysSettingCtrl">
-                <div sys-setting class="sys-setting "></div>
-            </div>
-        </div>
-        <div ng-show='tab == 2'>
-            <div ng-controller="AddUserCtrl">
-                <div add-user class="add-user"></div>
-            </div>
-        </div>
-        <div ng-show='tab == 3'>
-            <div ng-controller="SearchUserCtrl">
-                <div search-user></div>
-            </div>
-        </div>
-        <div ng-show='tab == 4'>
-            <div ng-controller="AddCameraCtrl">
-                <div add-camera class="add-camera"></div>
-            </div>
-        </div>
+        <!-- -->
     </div>
-
 </div>
+<script>
+    $(document).ready(function() {
+        recalculateDivSize();
+    });
+    $(window).resize(function() {
+        //alert("Screen REsized");
+        recalculateDivSize();
+    });
 
-</div>
-</div>s
+    function recalculateDivSize() {
+        var navbar_header_height = $(".navbar-header").height();
+        var window_height = $(window).height() - navbar_header_height;
+        $(".setting-menu").css("height", window_height - 20); //Boarder + padding
+    }
+</script>

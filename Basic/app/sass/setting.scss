@@ -1,18 +1,81 @@
-.setting-menu {
-    width: 15%;
-    height: 100%;
-    float: left;
-    border-color: #e5e5e5;
-    min-height: 700px;
-    border-right-style: solid;
-    border-right-width: thin;
+.setting-content{
+    padding-top : 10px ;
+    padding-left : 0px ;
+    background-color: #FFFFFF;
+
+    .menu_region{
+        padding-left : 0px ;
+    }
+    
 }
 
-.setting-menu-tab {
+//Global for all sub-pages
+.setting-menu {
+    //width: 15%;
+    //min-width: 150px;
+    height: 100%;
+    //float: left;
     border-color: #e5e5e5;
-    border-bottom-style: solid;
-    border-bottom-width: thin;
-    line-height: 50px;
-    border-top-style: solid;
-    border-top-width: thin;
+    //min-height: 700px;
+    border-right-style: solid;
+    border-right-width: thin;
+
+    .setting-menu-tab {
+        border-color: #e5e5e5;
+        font-weight: normal;
+        font-size : 14px;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        line-height: 50px;
+        //border-top-style: solid;
+        //border-top-width: thin;
+        padding-left : 20px;
+        text-align: left;
+        .icon-head {
+            padding-right: 5px;
+        }
+        .icon-tail {
+            float: right;
+            padding-right: 10px;
+            padding-top: 18px;
+        }
+    }
+    .setting-menu-tab:hover {
+        background-color: #cccccc;
+    }
+
+    .setting-menu-tab-child {
+        padding-left : 30px;
+        line-height: 40px;
+        font-weight: normal;
+        font-size : 12px;
+    }
 }
+
+.setting-body {
+    padding : 20px;
+
+    .setting-section{
+        padding-bottom : 50px;
+
+        .setting-section-header{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom-style: solid;
+            border-color: #e5e5e5;
+        }
+        .setting-section-body{
+            padding-top: 20px;
+            padding-bottom: 10px;
+
+            .row{
+                
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+        }
+
+
+    }
+}
+

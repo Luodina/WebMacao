@@ -1,63 +1,83 @@
-<div>
-    <form name="frm">
-        <div style="margin:auto;width:400px">
-            <h4 style="margin-top:20px">{{msg}}</h4>
-            <div style="margin-top:20px">
-                <div style="float:left;height:34px;vertical-align:middle;width:40%">
-                    <label>Username</label>
-                </div>
-                <div style="float:right;width:60%">
-                    <input type="text" ng-model="user.name" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="border-radius:4px">
-                </div>
-            </div>
-            <div style="margin-bottom:20px">
-                <div style="float:left;height:34px;width:40%">
-                    <label>Password</label>
-                </div>
-                <div style="float:right;width:60%">
-                    <input type="text" ng-model="user.password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" style="border-radius:4px">
-                </div>
-            </div>
-            <div style="margin-bottom:20px">
-                <div style="float:left;height:34px;width:40%">
-                    <label>Confirm Password</label>
-                </div>
-                <div style="float:right;width:60%">
-                    <input type="text" class="form-control" placeholder="The same as password" aria-describedby="basic-addon1" style="border-radius:4px">
-                </div>
-            </div>
+<div class="setting-section">
+    <div class="setting-section-header">
+        <h4>{{msg == 'Add user' ? 'web_sett_user_title_add' : 'web_sett_user_title_edit' | translate }}</h4>
+    </div>
+    <div class="setting-section-body">
+        <form name="frm">
             <div>
-                <div style="float:left;height:34px;width:40%">
-                    <label>Status </label>
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <label>{{'web_sett_user_name'| translate }}</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <input type="text" ng-model="user.name" class="form-control" placeholder="{{'web_sett_user_name'| translate }}" aria-describedby="basic-addon1" style="border-radius:4px">
+                    </div>
                 </div>
-                <div style="float:right;width:60%" class="checkbox">
-                    <label><input type="checkbox" ng-model="user.status" value="">Active</label>
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <label>{{'web_sett_user_pw'| translate }}</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <input type="password" ng-model="user.password" class="form-control" placeholder="{{'web_sett_user_pw'| translate }}" aria-describedby="basic-addon1" style="border-radius:4px">
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div style="float:left;height:34px;width:40%">
-                    <label>User Role</label>
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <label>{{'web_sett_user_pw_conf'| translate }}</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <input type="password" class="form-control" ng-model="user.password2" placeholder="{{'web_sett_user_pw_conf'| translate }}" aria-describedby="basic-addon1" style="border-radius:4px">
+                        <span class="textRgt" style='color:red' ng-show='user.password!==user.password2'>
+                                {{'web_sett_user_valmsg_pw'| translate }}
+                            </span>
+                    </div>
                 </div>
-                <div style="float:right;width:60%">
-                    <div class="input-group">
-                        <input type="text" ng-model="user.role" class="form-control" aria-label="Text input with dropdown button">
+                <!-- <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <label>{{'web_common_status'| translate }} </label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <input type="checkbox" ng-model="user.status" value="">
+                        <label style="padding-right:10px">{{'web_common_active_use'| translate }}</label>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <label>{{'web_sett_user_role'| translate }}</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <!-- <input type="text" ng-model="user.role" class="form-control" aria-label="Text input with dropdown button"> -->
                         <!-- <div class="input-group-btn">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Action
-                          </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div> -->
+                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                          </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
+                                        </div> -->
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    {{'web_sett_user_role'| translate }} : {{user.role}}
+                                    <span class="caret"></span>
+                                    </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li ng-repeat="role in roles">
+                                    <a ng-click="user.role=role">{{role}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <button type="button" ng-click="frm.$valid && addNewUser()" class="btn btn-primary">{{msg == 'Add user' ? 'web_common_add' : 'web_common_update' | translate }}</button>
+                        <buttontype="button" class="btn btn-primary" ui-sref="setting" ui-sref-opts="{reload: true, notify: true} ">{{'web_common_cancel'| translate }}</button>
                     </div>
                 </div>
             </div>
-            <div>
-                <button style="float:left;" class="btn" ng-click="frm.$valid && addNewUser()">Add</button>
-                <button style="float:right;" class="btn" ui-sref="setting" ui-sref-opts="{reload: true, notify: true}">Cancel</button>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
