@@ -2,23 +2,18 @@ FROM alpine:latest
 
 COPY Basic /prod
 WORKDIR /prod
-RUN ls -a
 RUN apk add --update nodejs git && \
-    npm install -g bower && \
+    npm install --global bower && \
+    git config --global url."https://".insteadOf git:// && \ 
+    npm install --global gulp@3.9.0 && \
     echo '{ "allow_root": true }' > /root/.bowerrc && \
-    git config --global url."https://".insteadOf git:// 
+    npm install && \
+    bower install && \
+    apk del nodejs git --purge 
+
 RUN bower --v
-RUN bower install --allow-root
-RUN npm --v
-RUN ls -a
-RUN npm install
-# install gulp globally
-RUN npm install --global gulp-cli 
-# install gulp locally
-RUN npm install gulp
-# RUN npm i -S babel-register
-RUN npm rebuild node-sass --force
 RUN gulp --v
-RUN ls server/
-RUN gulp build
+RUN npm --v
+
+
 
